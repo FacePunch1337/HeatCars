@@ -16262,6 +16262,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 532636244948714358, guid: ea50a6c0f4cb597419d135fe4c7bd5bb, type: 3}
+      propertyPath: m_VerticalDamping
+      value: 1.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 532636244948714358, guid: ea50a6c0f4cb597419d135fe4c7bd5bb, type: 3}
+      propertyPath: m_HorizontalDamping
+      value: 1.2
+      objectReference: {fileID: 0}
     - target: {fileID: 1090091001941159345, guid: ea50a6c0f4cb597419d135fe4c7bd5bb, type: 3}
       propertyPath: m_RootOrder
       value: 33
@@ -16306,29 +16314,60 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5324227381221235715, guid: ea50a6c0f4cb597419d135fe4c7bd5bb, type: 3}
+      propertyPath: m_VerticalDamping
+      value: 1.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5324227381221235715, guid: ea50a6c0f4cb597419d135fe4c7bd5bb, type: 3}
+      propertyPath: m_HorizontalDamping
+      value: 1.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6535198359178690842, guid: ea50a6c0f4cb597419d135fe4c7bd5bb, type: 3}
+      propertyPath: m_YAxis.Value
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6535198359178690842, guid: ea50a6c0f4cb597419d135fe4c7bd5bb, type: 3}
+      propertyPath: m_SplineCurvature
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6535198359178690842, guid: ea50a6c0f4cb597419d135fe4c7bd5bb, type: 3}
+      propertyPath: m_XAxis.m_MaxSpeed
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6535198359178690842, guid: ea50a6c0f4cb597419d135fe4c7bd5bb, type: 3}
+      propertyPath: m_XAxis.m_AccelTime
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6535198359178690842, guid: ea50a6c0f4cb597419d135fe4c7bd5bb, type: 3}
+      propertyPath: m_XAxis.m_DecelTime
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6535198359178690842, guid: ea50a6c0f4cb597419d135fe4c7bd5bb, type: 3}
+      propertyPath: m_XAxis.m_SpeedMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6535198359178690842, guid: ea50a6c0f4cb597419d135fe4c7bd5bb, type: 3}
+      propertyPath: m_XAxis.m_InputAxisValue
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6535198359178690842, guid: ea50a6c0f4cb597419d135fe4c7bd5bb, type: 3}
+      propertyPath: m_Orbits.Array.data[0].m_Radius
+      value: 120
+      objectReference: {fileID: 0}
     - target: {fileID: 7423145768350218709, guid: ea50a6c0f4cb597419d135fe4c7bd5bb, type: 3}
       propertyPath: m_Name
       value: CM FreeLook1
       objectReference: {fileID: 0}
+    - target: {fileID: 7876287656623223745, guid: ea50a6c0f4cb597419d135fe4c7bd5bb, type: 3}
+      propertyPath: m_VerticalDamping
+      value: 1.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7876287656623223745, guid: ea50a6c0f4cb597419d135fe4c7bd5bb, type: 3}
+      propertyPath: m_HorizontalDamping
+      value: 1.2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ea50a6c0f4cb597419d135fe4c7bd5bb, type: 3}
---- !u!1 &5137775492243516238 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7423145768350218709, guid: ea50a6c0f4cb597419d135fe4c7bd5bb, type: 3}
-  m_PrefabInstance: {fileID: 5137775492243516237}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &5137775492243516239
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5137775492243516238}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 0}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &5700170562547805395
 PrefabInstance:
   m_ObjectHideFlags: 0

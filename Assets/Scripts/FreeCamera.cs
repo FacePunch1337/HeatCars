@@ -7,7 +7,8 @@ using UnityEngine;
 
 public class FreeCamera : MonoBehaviour
 {
-    public GameObject tPlayer;
+   
+
     public Transform tFollowTarget;
     public PhotonView view;
     private CinemachineVirtualCamera vcam;
@@ -29,7 +30,7 @@ public class FreeCamera : MonoBehaviour
 
     }
 
-    void Update()
+    void FixedUpdate()
     {
         float aimX = Input.GetAxis("Mouse X");
         float aimY = Input.GetAxis("Mouse Y");
