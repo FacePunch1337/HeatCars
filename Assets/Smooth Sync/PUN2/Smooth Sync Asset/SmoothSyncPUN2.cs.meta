@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 8069ffa6ab7df7340ad5ce0c3da47526
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - rb: {fileID: 408214644774745529, guid: b17cd2e3e0fd5a44ebefc7edde06f117, type: 3}
+  - rb2D: {instanceID: 0}
+  - realObjectToSync: {fileID: 607388821203570472, guid: b17cd2e3e0fd5a44ebefc7edde06f117, type: 3}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
