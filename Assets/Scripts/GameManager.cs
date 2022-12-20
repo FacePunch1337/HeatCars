@@ -127,7 +127,7 @@ public class GameManager : MonoBehaviourPun
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
 
-
+        
     }
 
     public void QuitButton()

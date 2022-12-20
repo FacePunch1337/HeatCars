@@ -62,7 +62,7 @@ public class MouseDragDrop : MonoBehaviourPun
             
             if (gm.adminPanelOpen)
             {
-                if (photonView.IsMine) { SendDragDropData(); }
+                if (photonView.Owner.IsMasterClient) { SendDragDropData(); }
             }
 
             else return;
@@ -137,8 +137,11 @@ public class MouseDragDrop : MonoBehaviourPun
     [PunRPC]
     public void DragDrop()
     {
-        Vector3 mousePositionOffset = targetCamera.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, selectionDistance)) - originalScreenTargetPosition;
-        selectedRigidbody.velocity = (originalRigidbodyPos + mousePositionOffset - selectedRigidbody.transform.position) * forceAmount * Time.deltaTime;
+        Vector3 temp = new Vector3(Input.mousePosition.x, Input.mousePosition.y, selectionDistance);
+        //Debug.Log(targetCamera);
+        Vector3 mousePositionOffset = targetCamera.ScreenToWorldPoint(temp);
+        var a = mousePositionOffset - originalScreenTargetPosition;
+        selectedRigidbody.velocity = (originalRigidbodyPos + a - selectedRigidbody.transform.position) * forceAmount * Time.deltaTime;
     }
 
     public void SendSpawnData(Vector3 spawnPos)

@@ -194,6 +194,7 @@ GameObject:
   - component: {fileID: 8120708458011679138}
   - component: {fileID: 4898087086128247110}
   - component: {fileID: -3799943975096012234}
+  - component: {fileID: 1072940617630353041}
   m_Layer: 3
   m_Name: PoliceCar
   m_TagString: Car
@@ -552,6 +553,20 @@ AudioListener:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3301255732557501622}
   m_Enabled: 1
+--- !u!114 &1072940617630353041
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3301255732557501622}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b9718d6cbe573541b5b1c26e933b2ef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  forceAmount: 500
+  spawnObject: {fileID: 5371357051365534141, guid: 1fa66d59ab05ba34198cb8506d335eb6, type: 3}
 --- !u!1 &5140175279444356189
 GameObject:
   m_ObjectHideFlags: 0

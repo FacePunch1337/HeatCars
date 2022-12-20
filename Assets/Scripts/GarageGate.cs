@@ -9,65 +9,76 @@ public class GarageGate : MonoBehaviourPun
 
     private Vector3 up;
     private Vector3 narrow;
+    private float _pos;
+    private float _size;
     private bool open = false;
-    
+
+    private void Start()
+    {
+        gameObject.GetComponent<Rigidbody>().isKinematic = true;
+        _pos = gameObject.transform.position.y;
+        _size = gameObject.transform.localScale.y;
+    }
     void Update()
     {
-        up = transform.position;
-        narrow = transform.localScale;
+        
+        if (!open)
+        {
+            CloseGate();
+        }
+        
 
-        SendGateStateDate();
+
+
     }
 
-    public void SendGateStateDate()
+  
+    /*public void SendGateStateDate()
     {
         photonView.RPC("OpenCloseGate", RpcTarget.AllBuffered);
-    }
+    }*/
 
-    [PunRPC]
-    public void OpenCloseGate()
+    //[PunRPC]
+    public void OpenGate()
     {
-        if (Input.GetKeyDown(KeyCode.O))
+        if (gameObject.transform.position.y > 9f) return;
+        else
         {
-            if (!open)
-            {
-                while (up.y < 10f)
-                {
-                    up.y++;
-                    transform.position = up;
-                    Debug.Log(up.y);
-                    while (narrow.y > 3)
-                    {
-                        narrow.y--;
-                        transform.localScale = narrow;
-                        Debug.Log(narrow.y);
-                    }
-                }
+            
+            up = new Vector3(gameObject.transform.position.x, gameObject.transform.position.y + 1 * Time.deltaTime, gameObject.transform.position.z);
+            gameObject.transform.position = up;
+           
 
-                gameObject.GetComponent<Rigidbody>().isKinematic = true;
-                open = true;
-            }
-            else
-            {
-                while (up.y > 5.5361)
-                {
-                    up.y--;
-                    transform.position = up;
-                    Debug.Log(up.y);
-                    while (narrow.y < 10.44725)
-                    {
-                        narrow.y++;
-                        transform.localScale = narrow;
-                        Debug.Log(narrow.y);
-                    }
-                }
+            narrow = new Vector3(gameObject.transform.localScale.x, gameObject.transform.localScale.y - 6 * Time.deltaTime, gameObject.transform.localScale.z);
+            gameObject.transform.localScale = narrow;
 
-                gameObject.GetComponent<Rigidbody>().isKinematic = false;
-                open = false;
-            }
-
-
-
+            
+            open = true;
         }
+           
+        
+        
+
     }
+
+    public void CloseGate()
+    {
+        if (gameObject.transform.localScale.y > 30f) return;
+        else
+        {
+            up = new Vector3(gameObject.transform.position.x, gameObject.transform.position.y - 1 * Time.deltaTime, gameObject.transform.position.z);
+            gameObject.transform.position = up;
+
+            narrow = new Vector3(gameObject.transform.localScale.x, gameObject.transform.localScale.y + 6 * Time.deltaTime, gameObject.transform.localScale.z);
+            gameObject.transform.localScale = narrow;
+
+            
+            open = false;
+        }
+        
+        
+
+
+    }
+
 }

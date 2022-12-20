@@ -81,7 +81,7 @@ public class ConnectToServer : MonoBehaviourPunCallbacks
 
     public void Exit()
     {
-
+        PhotonNetwork.LeaveRoom();
         Application.Quit();
     }
 

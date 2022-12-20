@@ -4,6 +4,7 @@ using Cinemachine;
 using UnityEngine.SocialPlatforms;
 using Photon.Realtime;
 using System.Linq;
+using UnityEngine.Playables;
 //using static UnityEditor.ShaderGraph.Internal.KeywordDependentCollection;
 
 public class FollowCamera : MonoBehaviour
@@ -19,20 +20,26 @@ public class FollowCamera : MonoBehaviour
      {
          vcam = GetComponent<CinemachineFreeLook>();
 
+        GameObject.Find("GameManager").TryGetComponent(out SpawnPlayers spawnPlayers);
+        var vcamRot = vcam.transform.rotation;
+        vcamRot.x = 180;
          vcam.transform.parent = _transform;
          vcam.transform.position = Vector3.zero;
-     }
+        vcam.transform.rotation = vcamRot;
+
+
+    }
 
      // Use this for initialization
      void Start()
      {
-
+        
      }
 
     // Update is called once per frame
     void FixedUpdate()
     {
-
+        Debug.Log(vcam.transform.rotation);
         /*float aimX = Input.GetAxis("Mouse X");
         float aimY = Input.GetAxis("Mouse Y");
         vcam.transform.rotation *= Quaternion.AngleAxis(aimX * mouseSensitivity, Vector3.up);
@@ -55,7 +62,7 @@ public class FollowCamera : MonoBehaviour
         vcam.LookAt = vcam.transform.parent;
         vcam.Follow = vcam.transform.parent;
 
-
+        
 
 
     }

@@ -29,10 +29,11 @@ public class GarageScript : MonoBehaviourPun
         {
             if (other.GetComponent<PhotonView>().Owner.IsLocal)
             {
+                customPanel.GetComponentInChildren<Button>();
                 Cursor.visible = true;
                 Cursor.lockState = CursorLockMode.None;
                 customPanel.SetActive(true);
-                
+                GameObject.Find("FirstColorButton").GetComponent<Button>().Select();
             }
                 
 

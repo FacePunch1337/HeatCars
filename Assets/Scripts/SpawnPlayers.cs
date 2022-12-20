@@ -14,14 +14,15 @@ public class SpawnPlayers : MonoBehaviour
   
     //public GameObject player;
     [SerializeField] GameObject[] cars;
-    public Transform[] spawnPoints;
+    [SerializeField] public Transform[] spawnPoints;
     public Transform lookAtTarget;
     
     private PhotonView view;
     private SmoothSyncPUN2 smoothSync;
     private int selectedCar;
     private bool isFirstPlayer = true;
-
+    private GameObject _spawnedCar;
+    public GameObject spawnedCar { get { return _spawnedCar; } set { _spawnedCar = value; } }
     private void Start()
     {
         view = GetComponent<PhotonView>();
@@ -48,13 +49,19 @@ public class SpawnPlayers : MonoBehaviour
             isFirstPlayer = false;
             
             Transform randomTransform = spawnPoints[Random.Range(0, spawnPoints.Length)];
-            GameObject car = PhotonNetwork.Instantiate(cars[selectedCar].name, randomTransform.position, randomTransform.rotation);
-            
-            
            
-            GameObject.Find("CM FreeLook1").GetComponent<FollowCamera>().Attach(car.transform);
-           // GameObject.Find("CM vcam2").GetComponent<FreeCamera>().Attach(go.transform);
-        
+            _spawnedCar = PhotonNetwork.Instantiate(cars[selectedCar].name, randomTransform.position, randomTransform.rotation);
+
+
+            
+            GameObject.Find("CM FreeLook1").GetComponent<FollowCamera>().Attach(_spawnedCar.transform);
+
+
+
+            
+            
+            // GameObject.Find("CM vcam2").GetComponent<FreeCamera>().Attach(go.transform);
+
         }
     }
 

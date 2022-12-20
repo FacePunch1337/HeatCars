@@ -31,7 +31,9 @@ public class CarController : MonoBehaviourPun
     public bool ready;
     private PhotonView view;
     private TextMeshPro _nickname;
+   //private Joystick joystick;
     private float motor;
+    private float steering;
     private float _currentSpeed;
     public float currentSpeed { get { return _currentSpeed; } set { _currentSpeed = value; } }
     private const byte COLOR_CHANGE_EVENT = 0;
@@ -47,7 +49,7 @@ public class CarController : MonoBehaviourPun
     {
         view = GetComponent<PhotonView>();
         nickname = GetComponentInChildren<TextMeshPro>();
-       
+        //joystick = GameObject.Find("Dynamic Joystick").GetComponent<DynamicJoystick>();
         nickname.text = view.Owner.NickName;
         ready = false;
         
@@ -96,11 +98,17 @@ public class CarController : MonoBehaviourPun
     {
         currentSpeed = rigidbody.velocity.magnitude;
 
+
+        
         //Debug.Log(currentSpeed);
         if (view.IsMine)
         {
-             motor = maxMotorTorque * Input.GetAxis("Vertical");
-             float steering = maxSteeringAngle * Input.GetAxis("Horizontal");
+            //steering = (joystick.Vertical + joystick.Horizontal) * maxSteeringAngle;
+            
+            //motor = joystick.Vertical  * (maxSteeringAngle + maxMotorTorque) * joystick.Horizontal;
+            
+            motor = maxMotorTorque * Input.GetAxis("Vertical");
+            steering = maxSteeringAngle * Input.GetAxis("Horizontal");
 
 
             foreach (AxleInfo axleInfo in axleInfos)
