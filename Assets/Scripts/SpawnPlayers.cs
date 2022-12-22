@@ -7,6 +7,7 @@ using Smooth;
 using UnityEngine.Experimental.Rendering.Universal;
 using UnityEngine.SceneManagement;
 using System.Linq;
+
 //using static UnityEditor.Progress;
 
 public class SpawnPlayers : MonoBehaviour
@@ -51,15 +52,16 @@ public class SpawnPlayers : MonoBehaviour
             Transform randomTransform = spawnPoints[Random.Range(0, spawnPoints.Length)];
            
             _spawnedCar = PhotonNetwork.Instantiate(cars[selectedCar].name, randomTransform.position, randomTransform.rotation);
-
-
+             GameObject.Find("CM FreeLook1").GetComponent<FollowCamera>().Attach(_spawnedCar.transform);
+             
             
-            GameObject.Find("CM FreeLook1").GetComponent<FollowCamera>().Attach(_spawnedCar.transform);
+             
 
 
 
-            
-            
+
+
+
             // GameObject.Find("CM vcam2").GetComponent<FreeCamera>().Attach(go.transform);
 
         }

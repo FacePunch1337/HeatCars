@@ -8,6 +8,7 @@ using UnityEngine.UI;
 public class GarageScript : MonoBehaviourPun
 {
     public GameObject customPanel; 
+    public Color colorMemory; 
     
     private Collider _other; 
     // Start is called before the first frame update
@@ -24,21 +25,26 @@ public class GarageScript : MonoBehaviourPun
 
     private void OnTriggerEnter(Collider other)
     {
-        _other = other;
-        if (other.gameObject.CompareTag("Car"))
+        if (other.GetComponent<PhotonView>().Owner.IsLocal)
         {
-            if (other.GetComponent<PhotonView>().Owner.IsLocal)
+            _other = other;
+            if (other.gameObject.CompareTag("Car"))
             {
-                customPanel.GetComponentInChildren<Button>();
-                Cursor.visible = true;
-                Cursor.lockState = CursorLockMode.None;
-                customPanel.SetActive(true);
-                GameObject.Find("FirstColorButton").GetComponent<Button>().Select();
-            }
-                
+                if (other.GetComponent<PhotonView>().Owner.IsLocal)
+                {
+                    customPanel.GetComponentInChildren<Button>();
+                    Cursor.visible = true;
+                    Cursor.lockState = CursorLockMode.None;
+                    customPanel.SetActive(true);
+                    GameObject.Find("FirstColorButton").GetComponent<Button>().Select();
+                }
 
+
+            }
+            else return;
         }
         else return;
+        
 
         //  textReadyCount.SetActive(false);
         /*if (!other.gameObject.TryGetComponent(out CustomCar customCar)) return;
@@ -52,19 +58,22 @@ public class GarageScript : MonoBehaviourPun
 
     private void OnTriggerExit(Collider other)
     {
-        _other = other;
-        if (other.gameObject.CompareTag("Car"))
+        if (other.GetComponent<PhotonView>().Owner.IsLocal)
         {
-            if (other.GetComponent<PhotonView>().Owner.IsLocal)
+            _other = other;
+            if (other.gameObject.CompareTag("Car"))
             {
-                customPanel.SetActive(false);
+                if (other.GetComponent<PhotonView>().Owner.IsLocal)
+                {
+                    customPanel.SetActive(false);
 
-                Cursor.visible = false;
-                Cursor.lockState = CursorLockMode.Locked;
+                    Cursor.visible = false;
+                    Cursor.lockState = CursorLockMode.Locked;
+                }
             }
+            else return;
         }
         else return;
-
         //  textReadyCount.SetActive(false);
         /*if (!other.gameObject.TryGetComponent(out CustomCar customCar)) return;
         else if (base.photonView.IsMine) customCar.SendCustomCarDate();*/
@@ -80,11 +89,24 @@ public class GarageScript : MonoBehaviourPun
         if (_other.GetComponent<PhotonView>().IsMine)
         {
             _other.gameObject.TryGetComponent(out CustomCar customCar);
-            var color = EventSystem.current.currentSelectedGameObject.GetComponent<Image>().color;
-  
-            customCar.Send(color);
-        }
+            if (EventSystem.current.currentSelectedGameObject.GetComponent<Image>().color == null) return;
+            else
+            {
+                var color = EventSystem.current.currentSelectedGameObject.GetComponent<Image>().color;
+                colorMemory = color; 
+                customCar.SendColor(colorMemory);
+                
+            }
             
+
+            
+            
+            
+
+            
+
+        }
+
 
     }
 }

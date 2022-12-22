@@ -101,21 +101,23 @@ public class CustomCar : MonoBehaviourPun
     
     private Color _color;
 
-    private int current_car;
+    private int current_color;
     public Color color { get { return _color; } set { _color = value; } }
     private bool neon;
     private void Start()
     {
         PhotonNetwork.ConnectUsingSettings();
+        PlayerPrefs.SetInt("SelectedColor", current_color);
     }
 
-    public void Send(Color color)
+    public void SendColor(Color color)
     {
         float[] arrColors = { color.r, color.g, color.b, color.a };
             
         photonView.RPC("ChangeColor", RpcTarget.AllBuffered, arrColors);
  
     }
+    
 
     [PunRPC]
     public void ChangeColor(float[] arr)
@@ -140,7 +142,7 @@ public class CustomCar : MonoBehaviourPun
         }
 
 
-
+        PlayerPrefs.SetInt("SelectedColor", current_color);
 
 
     }
