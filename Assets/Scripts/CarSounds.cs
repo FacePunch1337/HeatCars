@@ -12,11 +12,11 @@ public class CarSounds : MonoBehaviourPun
     public float maxPitch;
     public float minSpeed;
     public float maxSpeed;
-
+    
 
     //public AudioSource driveSource;
     //public AudioSource skirtSource;
-    public AudioSource beepSource;
+    public AudioSource[] audioSources;
     private new Rigidbody rigidbody;
 
     private float pitchFromCar;
@@ -29,52 +29,54 @@ public class CarSounds : MonoBehaviourPun
 
         // driveSource = GetComponent<AudioSource>();
 
-        beepSource = GetComponent<AudioSource>();
+        audioSources = GetComponents<AudioSource>();
         rigidbody = GetComponent<Rigidbody>();
     }
     void FixedUpdate()
     {
-        //EngineSound();
-        if (Input.GetKey(KeyCode.E) && photonView.IsMine)
+        if(photonView.Owner.IsLocal) EngineSound();
+
+        if (Input.GetKeyDown(KeyCode.E) && photonView.IsMine)
         {
             SendBeepSoundData();
         }
 
+        if (Input.GetKeyDown(KeyCode.Space) && photonView.IsMine)
+        {
+            SkirtSound();
+        }
+        if (Input.GetKeyUp(KeyCode.Space) && photonView.IsMine)
+        {
+            audioSources[2].Stop();
+        }
+
     }
-    /* void EngineSound()
+
+    
+    public void EngineSound()
     {
         currentSpeed = rigidbody.velocity.magnitude;
         pitchFromCar = rigidbody.velocity.magnitude / 100f;
 
         if (currentSpeed < minSpeed)
         {
-            driveSource.pitch = minPitch;
+            audioSources[0].pitch = minPitch;
         }
 
         if (currentSpeed > minSpeed && currentSpeed < maxSpeed)
         {
-            driveSource.pitch = minPitch + pitchFromCar;
+            audioSources[0].pitch = minPitch + pitchFromCar;
         }
 
         if (currentSpeed > maxSpeed)
         {
-            driveSource.pitch = maxPitch;
+            audioSources[0].pitch = maxPitch;
         }
        
 
-    }*/
+    }
 
-    /* void SkirtSound()
-     {
-         if (Input.GetKey(KeyCode.Space))
-         {
-             skirtSource.Play();
-         }
-
-
-
-
-     }*/
+    
 
     public void SendBeepSoundData()
     {
@@ -84,8 +86,17 @@ public class CarSounds : MonoBehaviourPun
     [PunRPC]
     public void Beep()
     {
-        beepSource.Play();
+        audioSources[1].Play();
     }
 
-   
+    public void SkirtSound()
+    {
+        if (currentSpeed > 10)
+        {
+            audioSources[2].Play();
+        }
+        
+    }
+
+
 }

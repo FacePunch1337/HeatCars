@@ -39,7 +39,7 @@ public class FollowCamera : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        Debug.Log(vcam.transform.rotation);
+        
         /*float aimX = Input.GetAxis("Mouse X");
         float aimY = Input.GetAxis("Mouse Y");
         vcam.transform.rotation *= Quaternion.AngleAxis(aimX * mouseSensitivity, Vector3.up);
