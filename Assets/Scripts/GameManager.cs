@@ -17,6 +17,7 @@ public class GameManager : MonoBehaviourPun
     
     public GameObject menuPanel;
     public GameObject adminPanel;
+    public GameObject customPanel;
     //public GameObject policeCar;
 
     public bool first_press = true;
@@ -39,7 +40,9 @@ public class GameManager : MonoBehaviourPun
     void Update()
     {
         // Cursor.visible = false;
-        // CountOfPlayer();
+        // CountOfPlayer();  
+
+
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             if (!menu)
@@ -87,7 +90,19 @@ public class GameManager : MonoBehaviourPun
 
         }
 
-        
+        if (Input.GetKeyDown(KeyCode.C))
+        {
+            Cursor.visible = true;
+            Cursor.lockState = CursorLockMode.None;
+            customPanel.SetActive(true);
+        }
+        if (Input.GetKeyUp(KeyCode.C))
+        {
+            Cursor.visible = false;
+            Cursor.lockState = CursorLockMode.Locked;
+            customPanel.SetActive(true);
+        }
+
 
         /*if (Input.GetKey(KeyCode.P))
         {

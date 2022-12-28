@@ -16,6 +16,7 @@ public class Trigger : MonoBehaviourPun
     private PhotonView _otherPhotonView;
     //public GameObject buttonReady;
     public GameObject buttonStart;
+    public GameObject modPanel;
     public GameObject textReadyCount;
     
     private bool start;
@@ -28,8 +29,10 @@ public class Trigger : MonoBehaviourPun
         
        
         buttonStart.SetActive(false);
+        modPanel.SetActive(false);
+
         //buttonReady.SetActive(false);
-       
+
 
     }
     private void Update()
@@ -53,9 +56,19 @@ public class Trigger : MonoBehaviourPun
         {
             if (other.GetComponent<PhotonView>().Owner.IsMasterClient && other.GetComponent<PhotonView>().AmOwner)
             {
+                modPanel.SetActive(true);
                 Cursor.visible = true;
                 Cursor.lockState = CursorLockMode.None;
-                buttonStart.SetActive(true);
+                
+                if (readyCount == PhotonNetwork.PlayerList.Length)
+                {
+                    buttonStart.SetActive(true);
+                }
+                else
+                {
+                    buttonStart.SetActive(false);
+                }
+                
             }
         }
         else return;
@@ -70,7 +83,8 @@ public class Trigger : MonoBehaviourPun
         if (other.gameObject.CompareTag("Car"))
         {
             readyCount--;
-            buttonStart.SetActive(false);
+            modPanel.SetActive(false);
+            //buttonStart.SetActive(false);
             //buttonReady.SetActive(false);
             Cursor.visible = false;
             Cursor.lockState = CursorLockMode.Locked;

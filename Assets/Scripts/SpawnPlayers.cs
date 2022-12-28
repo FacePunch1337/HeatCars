@@ -54,8 +54,10 @@ public class SpawnPlayers : MonoBehaviour
             _spawnedCar = PhotonNetwork.Instantiate(cars[selectedCar].name, randomTransform.position, randomTransform.rotation);
              GameObject.Find("CM FreeLook1").GetComponent<FollowCamera>().Attach(_spawnedCar.transform);
              
-            
-             
+            // cars[selectedCar].AddComponent<AudioListener>();
+
+
+
 
 
 

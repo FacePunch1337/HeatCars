@@ -110,36 +110,62 @@ public class CustomCar : MonoBehaviourPun
         PlayerPrefs.SetInt("SelectedColor", current_color);
     }
 
-    public void SendColor(Color color)
+    public void SendColor(Color color, bool neon)
     {
         float[] arrColors = { color.r, color.g, color.b, color.a };
+
+        bool[] arrBool = { neon };
             
-        photonView.RPC("ChangeColor", RpcTarget.AllBuffered, arrColors);
+        photonView.RPC("ChangeColor", RpcTarget.AllBuffered, arrColors, arrBool);
  
     }
     
 
     [PunRPC]
-    public void ChangeColor(float[] arr)
+    public void ChangeColor(float[] arr, bool[] neon)
     {
         Color color = new Color(arr[0], arr[1], arr[2], arr[3]);
         var carMaterialList = gameObject.GetComponent<MeshRenderer>();
-        if (gameObject.name.Contains("PoliceCar"))
+        if (neon[0])
         {
-            carMaterialList.materials[7].color = color;
-            //PlayerPrefs.SetString("CarColor", );
+            if (gameObject.name.Contains("PoliceCar"))
+            {
+                carMaterialList.materials[10].color = color;
+                //PlayerPrefs.SetString("CarColor", );
+            }
+            else if (gameObject.name.Contains("Car"))
+            {
+                carMaterialList.materials[1].color = color;
+                // PlayerPrefs.SetInt("CarColor", current_car);
+            }
+            else if (gameObject.name.Contains("Bus"))
+            {
+                carMaterialList.materials[3].color = color;
+                carMaterialList.materials[6].color = color;
+                carMaterialList.materials[8].color = color;
+                // PlayerPrefs.SetInt("CarColor", current_car);
+            }
         }
-        else if(gameObject.name.Contains("Car"))
+        else
         {
-            carMaterialList.materials[0].color = color;
-           // PlayerPrefs.SetInt("CarColor", current_car);
+            if (gameObject.name.Contains("PoliceCar"))
+            {
+                carMaterialList.materials[7].color = color;
+                //PlayerPrefs.SetString("CarColor", );
+            }
+            else if (gameObject.name.Contains("Car"))
+            {
+                carMaterialList.materials[0].color = color;
+                // PlayerPrefs.SetInt("CarColor", current_car);
+            }
+            else if (gameObject.name.Contains("Bus"))
+            {
+                carMaterialList.materials[4].color = color;
+                carMaterialList.materials[9].color = color;
+                // PlayerPrefs.SetInt("CarColor", current_car);
+            }
         }
-        else if (gameObject.name.Contains("Bus"))
-        {
-            carMaterialList.materials[4].color = color;
-            carMaterialList.materials[9].color = color;
-            // PlayerPrefs.SetInt("CarColor", current_car);
-        }
+        
 
 
         PlayerPrefs.SetInt("SelectedColor", current_color);

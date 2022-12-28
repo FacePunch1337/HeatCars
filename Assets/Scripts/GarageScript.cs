@@ -93,16 +93,11 @@ public class GarageScript : MonoBehaviourPun
             else
             {
                 var color = EventSystem.current.currentSelectedGameObject.GetComponent<Image>().color;
-                colorMemory = color; 
-                customCar.SendColor(colorMemory);
+                colorMemory = color;
+                var neon = EventSystem.current.currentSelectedGameObject.gameObject.CompareTag("NeonColorButton");
                 
+                customCar.SendColor(colorMemory, neon);
             }
-            
-
-            
-            
-            
-
             
 
         }

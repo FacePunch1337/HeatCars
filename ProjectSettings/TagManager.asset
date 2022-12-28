@@ -6,6 +6,9 @@ TagManager:
   tags:
   - Car
   - NeonColor
+  - MetalProp
+  - Tire
+  - NeonColorButton
   layers:
   - Default
   - TransparentFX

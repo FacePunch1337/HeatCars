@@ -32,7 +32,7 @@ MonoBehaviour:
   PunLogging: 0
   EnableSupportLogger: 0
   RunInBackground: 1
-  StartInOfflineMode: 0
+  StartInOfflineMode: 1
   RpcList:
   - ClickRpc
   - DestroyRpc
@@ -62,6 +62,9 @@ MonoBehaviour:
   - DragDrop
   - OpenCloseGate
   - Beep
+  - EngineSound
+  - EngineStartSound
+  - SkirtSound
   DisableAutoOpenWizard: 1
   ShowSettings: 0
   DevRegionSetOnce: 1
