@@ -9,6 +9,7 @@ TagManager:
   - MetalProp
   - Tire
   - NeonColorButton
+  - GameZone
   layers:
   - Default
   - TransparentFX

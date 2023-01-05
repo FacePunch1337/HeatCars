@@ -35,6 +35,7 @@ public class CarController : MonoBehaviourPun
     private float motor;
     private float steering;
     private float _currentSpeed;
+    private Collision collision;
     public float currentSpeed { get { return _currentSpeed; } set { _currentSpeed = value; } }
     private const byte COLOR_CHANGE_EVENT = 0;
     [SerializeField] private Material carBodyMaterial;
@@ -49,11 +50,12 @@ public class CarController : MonoBehaviourPun
     {
         view = GetComponent<PhotonView>();
         nickname = GetComponentInChildren<TextMeshPro>();
+        
         //joystick = GameObject.Find("Dynamic Joystick").GetComponent<DynamicJoystick>();
         nickname.text = view.Owner.NickName;
         ready = false;
-        
 
+        collision = GetComponent<Collision>();
 
     }
 
@@ -119,14 +121,14 @@ public class CarController : MonoBehaviourPun
                     axleInfo.leftWheel.steerAngle = steering;
                     axleInfo.rightWheel.steerAngle = steering;
 
-                    if (currentSpeed > 45f)
+                   /* if (currentSpeed > 10f)
                     {
                         WheelFrictionCurve wheelFrictionCurve = new WheelFrictionCurve();
 
-                        wheelFrictionCurve.extremumSlip = 2f;
-                        wheelFrictionCurve.extremumValue = 2f;
-                        wheelFrictionCurve.asymptoteSlip = 2f;
-                        wheelFrictionCurve.asymptoteValue = 2f;
+                        wheelFrictionCurve.extremumSlip = 3f;
+                        wheelFrictionCurve.extremumValue = 3f;
+                        wheelFrictionCurve.asymptoteSlip = 4f;
+                        wheelFrictionCurve.asymptoteValue = 3f;
                         wheelFrictionCurve.stiffness = 5;
 
 
@@ -137,7 +139,7 @@ public class CarController : MonoBehaviourPun
                     }
 
                     else
-                    {
+                    {*/
                         WheelFrictionCurve wheelFrictionCurve = new WheelFrictionCurve();
 
                         wheelFrictionCurve.extremumSlip = 1f;
@@ -151,7 +153,7 @@ public class CarController : MonoBehaviourPun
 
                         axleInfo.rightWheel.GetComponent<WheelCollider>().sidewaysFriction = wheelFrictionCurve;
                         axleInfo.leftWheel.GetComponent<WheelCollider>().sidewaysFriction = wheelFrictionCurve;
-                    }
+                  //  }
 
 
                 }
@@ -167,7 +169,7 @@ public class CarController : MonoBehaviourPun
                 {
                     
                     
-                    if (axleInfo.braking && motor < 200)
+                    if (axleInfo.braking)
                     {
                         axleInfo.rightWheel.GetComponent<WheelCollider>().brakeTorque = 2300;
                         axleInfo.leftWheel.GetComponent<WheelCollider>().brakeTorque = 2300;
@@ -258,10 +260,19 @@ public class CarController : MonoBehaviourPun
 
 
 
-   
-    
+    private void OnCollisionEnter(Collision _collision)
+    {
+        if (collision.gameObject.CompareTag("Car"))
+        {
 
-    
+           // gameObject.GetComponent<Rigidbody>().AddForce(rigidbody.velocity * 6, ForceMode.Impulse);
+
+        }
+
+    }
+
+
+
 
     /*private void NetworkingClient_EventRecived(EventData obj)
     {
