@@ -55,7 +55,7 @@ public class CarController : MonoBehaviourPun
         nickname.text = view.Owner.NickName;
         ready = false;
 
-        collision = GetComponent<Collision>();
+        //collision = GetComponent<Collision>();
 
     }
 
@@ -262,12 +262,12 @@ public class CarController : MonoBehaviourPun
 
     private void OnCollisionEnter(Collision _collision)
     {
-        if (collision.gameObject.CompareTag("Car"))
+       /* if (_collision.gameObject.CompareTag("Car"))
         {
 
            // gameObject.GetComponent<Rigidbody>().AddForce(rigidbody.velocity * 6, ForceMode.Impulse);
 
-        }
+        }*/
 
     }
 
