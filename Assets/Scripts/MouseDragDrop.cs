@@ -9,8 +9,8 @@ public class MouseDragDrop : MonoBehaviourPun
     public float forceAmount = 500;
 
     private Rigidbody selectedRigidbody;
-    private Collider collider;
-    public GameObject spawnObject;
+    private new Collider collider;
+    
     private Camera targetCamera;
     private Vector3 originalScreenTargetPosition;
     private Vector3 originalRigidbodyPos;
@@ -18,7 +18,7 @@ public class MouseDragDrop : MonoBehaviourPun
     private float selectionDistance;
     private float colliderDistance;
     private GameManager gm;
-    
+    [SerializeField] public GameObject spawnObject;
 
 
     void Start()
@@ -46,11 +46,15 @@ public class MouseDragDrop : MonoBehaviourPun
         {
             selectedRigidbody = null;
         }
-        if (Input.GetMouseButtonDown(1))
+        if (Input.GetMouseButtonDown(1) && photonView.Owner.IsMasterClient)
         {
             collider = GetFlatToSpawn();
         }
-       
+        if (Input.GetMouseButtonUp(1))
+        {
+            collider = null;
+        }
+
 
 
     }
@@ -67,17 +71,14 @@ public class MouseDragDrop : MonoBehaviourPun
 
             else return;
         }
-        /*if (collider)
+        if (collider)
         {
             if (gm.adminPanelOpen)
             {
-                if (photonView.Owner.IsLocal) { SendSpawnData(Input.mousePosition); }
-                
-
-
+                if (photonView.Owner.IsMasterClient) SendSpawnData(Input.mousePosition);
             }
 
-        }*/
+        }
 
 
 
@@ -116,7 +117,7 @@ public class MouseDragDrop : MonoBehaviourPun
         bool hit = Physics.Raycast(ray, out hitInfo);
         if (hit)
         {
-            if (hitInfo.collider.gameObject.GetComponent<Collider>() && photonView.Owner.IsLocal)
+            if (hitInfo.collider.gameObject.GetComponent<Collider>())
             {
 
                 colliderDistance = Vector3.Distance(ray.origin, hitInfo.point);
@@ -148,6 +149,7 @@ public class MouseDragDrop : MonoBehaviourPun
     {
         float[] arrPoints = { spawnPos.x, spawnPos.y + 15, colliderDistance};
         photonView.RPC("SpawnObject", RpcTarget.AllBuffered, arrPoints);
+        
     }
 
     [PunRPC]
@@ -155,8 +157,9 @@ public class MouseDragDrop : MonoBehaviourPun
     {
         
         Vector3 spawnPos = new Vector3(spawnPoint[0], spawnPoint[1], spawnPoint[2]);
-       // Vector3 worldPos = Camera.main.ScreenToWorldPoint(spawnPos);
-        Instantiate(spawnObject, spawnPos, Quaternion.identity);
+        Vector3 worldPos = Camera.main.ScreenToWorldPoint(spawnPos);
+        Instantiate(spawnObject, worldPos, Quaternion.identity);
+        Debug.Log("Spawn");
         collider = null;
     }
 }

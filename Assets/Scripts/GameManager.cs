@@ -168,6 +168,6 @@ public class GameManager : MonoBehaviourPun
         Cursor.lockState = CursorLockMode.None;
     }
 
-
+    
 
 }
