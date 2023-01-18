@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 8802519617145707975}
   - component: {fileID: 5040915304392785627}
   m_Layer: 0
-  m_Name: pCube45
+  m_Name: Climb
   m_TagString: MetalProp
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

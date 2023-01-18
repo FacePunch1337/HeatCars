@@ -18,7 +18,12 @@ public class MouseDragDrop : MonoBehaviourPun
     private float selectionDistance;
     private float colliderDistance;
     private GameManager gm;
-    [SerializeField] public GameObject[] spawnObjects;
+    private GameProps gameProps;
+    
+
+    private int PropID;
+    
+   
 
 
     void Start()
@@ -27,10 +32,15 @@ public class MouseDragDrop : MonoBehaviourPun
         {
             targetCamera = GameObject.Find("FollowCamera").GetComponent<Camera>();
         }
+        
         GameObject.Find("GameManager").TryGetComponent(out GameManager gameManager);
         gm = gameManager;
+        GameObject.Find("GameManager").TryGetComponent(out GameProps _gameProps);
+        gameProps = _gameProps;
         
-        
+
+
+
     }
 
     void Update()
@@ -147,6 +157,7 @@ public class MouseDragDrop : MonoBehaviourPun
 
     public void SendSpawnData(Vector3 spawnPos)
     {
+        PropID = gameProps.propID;
         float[] arrPoints = { spawnPos.x, spawnPos.y + 15, colliderDistance};
         photonView.RPC("SpawnObject", RpcTarget.AllBuffered, arrPoints);
         
@@ -155,11 +166,12 @@ public class MouseDragDrop : MonoBehaviourPun
     [PunRPC]
     public void SpawnObject(float[] spawnPoint)
     {
-        
+
+        Debug.Log(PropID);
         Vector3 spawnPos = new Vector3(spawnPoint[0], spawnPoint[1], spawnPoint[2]);
         Vector3 worldPos = Camera.main.ScreenToWorldPoint(spawnPos);
-        Instantiate(spawnObjects[0], worldPos, Quaternion.identity);
-        Debug.Log("Spawn");
+        Instantiate(gameProps._props[PropID], worldPos, Quaternion.identity);
+        //Debug.Log(gameProps._props[PropID]);
         collider = null;
     }
 }

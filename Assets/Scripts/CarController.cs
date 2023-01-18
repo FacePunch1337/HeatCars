@@ -142,7 +142,7 @@ public class CarController : MonoBehaviourPun
                     {*/
                         WheelFrictionCurve wheelFrictionCurve = new WheelFrictionCurve();
 
-                        wheelFrictionCurve.extremumSlip = 1f;
+                        wheelFrictionCurve.extremumSlip = 2f;
                         wheelFrictionCurve.extremumValue = 2;
                         wheelFrictionCurve.asymptoteSlip = 2;
                         wheelFrictionCurve.asymptoteValue = 2;
@@ -207,7 +207,7 @@ public class CarController : MonoBehaviourPun
                     
                         WheelFrictionCurve wheelFrictionCurve = new WheelFrictionCurve();
                        
-                        wheelFrictionCurve.extremumSlip = 1;
+                        wheelFrictionCurve.extremumSlip = 2;
                         wheelFrictionCurve.extremumValue = 2;
                         wheelFrictionCurve.asymptoteSlip = 2;
                         wheelFrictionCurve.asymptoteValue = 2;

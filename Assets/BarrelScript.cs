@@ -13,8 +13,8 @@ public class BarrelScript : MonoBehaviour
     private void OnCollisionEnter(Collision other)
     {
         
-            audioSource.volume = other.impulse.magnitude * 0.01f;
-            audioSource.Play();
+          //  audioSource.volume = other.impulse.magnitude * 0.01f;
+          //  audioSource.Play();
         
 
     }

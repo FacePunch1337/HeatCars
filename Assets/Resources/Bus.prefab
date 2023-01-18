@@ -774,7 +774,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   forceAmount: 500
-  spawnObject: {fileID: 7409306960194218071, guid: 6f188d1da8d7bca43971295e94605351, type: 3}
 --- !u!82 &3192205397808206047
 AudioSource:
   m_ObjectHideFlags: 0

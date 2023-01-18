@@ -194,10 +194,10 @@ GameObject:
   - component: {fileID: -6295466425656338744}
   - component: {fileID: 8120708458011679138}
   - component: {fileID: 4898087086128247110}
-  - component: {fileID: 2997091490630378349}
   - component: {fileID: 3020589653615949234}
   - component: {fileID: 8991732059162091019}
   - component: {fileID: -8021574223895762534}
+  - component: {fileID: 4564951840771853031}
   m_Layer: 3
   m_Name: Car
   m_TagString: Car
@@ -646,20 +646,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5010b0258cbd4bd4d8027012b7ea4ada, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &2997091490630378349
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3301255732557501622}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5b9718d6cbe573541b5b1c26e933b2ef, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  forceAmount: 500
-  spawnObject: {fileID: 7409306960194218071, guid: 6f188d1da8d7bca43971295e94605351, type: 3}
 --- !u!82 &3020589653615949234
 AudioSource:
   m_ObjectHideFlags: 0
@@ -948,6 +934,19 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &4564951840771853031
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3301255732557501622}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b9718d6cbe573541b5b1c26e933b2ef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  forceAmount: 500
 --- !u!1 &5140175279444356189
 GameObject:
   m_ObjectHideFlags: 0
@@ -1112,13 +1111,13 @@ WheelCollider:
   m_Mass: 20
   m_WheelDampingRate: 3
   m_ForwardFriction:
-    m_ExtremumSlip: 1
+    m_ExtremumSlip: 2
     m_ExtremumValue: 2
     m_AsymptoteSlip: 2
     m_AsymptoteValue: 2
     m_Stiffness: 5
   m_SidewaysFriction:
-    m_ExtremumSlip: 1
+    m_ExtremumSlip: 2
     m_ExtremumValue: 2
     m_AsymptoteSlip: 2
     m_AsymptoteValue: 2
@@ -1174,13 +1173,13 @@ WheelCollider:
   m_Mass: 20
   m_WheelDampingRate: 3
   m_ForwardFriction:
-    m_ExtremumSlip: 1
+    m_ExtremumSlip: 2
     m_ExtremumValue: 2
     m_AsymptoteSlip: 2
     m_AsymptoteValue: 2
     m_Stiffness: 5
   m_SidewaysFriction:
-    m_ExtremumSlip: 1
+    m_ExtremumSlip: 2
     m_ExtremumValue: 2
     m_AsymptoteSlip: 2
     m_AsymptoteValue: 2
@@ -1236,13 +1235,13 @@ WheelCollider:
   m_Mass: 20
   m_WheelDampingRate: 3
   m_ForwardFriction:
-    m_ExtremumSlip: 1
+    m_ExtremumSlip: 2
     m_ExtremumValue: 2
     m_AsymptoteSlip: 2
     m_AsymptoteValue: 2
     m_Stiffness: 5
   m_SidewaysFriction:
-    m_ExtremumSlip: 1
+    m_ExtremumSlip: 2
     m_ExtremumValue: 2
     m_AsymptoteSlip: 2
     m_AsymptoteValue: 2
@@ -1298,13 +1297,13 @@ WheelCollider:
   m_Mass: 20
   m_WheelDampingRate: 3
   m_ForwardFriction:
-    m_ExtremumSlip: 1
+    m_ExtremumSlip: 2
     m_ExtremumValue: 2
     m_AsymptoteSlip: 2
     m_AsymptoteValue: 2
     m_Stiffness: 5
   m_SidewaysFriction:
-    m_ExtremumSlip: 1
+    m_ExtremumSlip: 2
     m_ExtremumValue: 2
     m_AsymptoteSlip: 2
     m_AsymptoteValue: 2
