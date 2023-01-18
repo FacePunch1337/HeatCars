@@ -14,6 +14,7 @@ using ExitGames.Client.Photon;
 using System.Xml.Serialization;
 using UnityEngine.EventSystems;
 using System.Data;
+using UnityEngine.Experimental.GlobalIllumination;
 //using System.Drawing;
 
 //using static CarController;
@@ -26,6 +27,7 @@ public class CarController : MonoBehaviourPun
     public List<AxleInfo> axleInfos;
     public Transform carTransform;
     public new Rigidbody rigidbody;
+    
     public float maxMotorTorque;
     public float maxSteeringAngle;
     public bool ready;
@@ -39,18 +41,16 @@ public class CarController : MonoBehaviourPun
     public float currentSpeed { get { return _currentSpeed; } set { _currentSpeed = value; } }
     private const byte COLOR_CHANGE_EVENT = 0;
     [SerializeField] private Material carBodyMaterial;
+    [SerializeField] private Light[] spotLights;
+    private bool lightOn;
 
 
-
-
-
-
-
-    private void Start()
+    public void Start()
     {
+        lightOn = false;
         view = GetComponent<PhotonView>();
         nickname = GetComponentInChildren<TextMeshPro>();
-        
+        spotLights = GetComponents<Light>();
         //joystick = GameObject.Find("Dynamic Joystick").GetComponent<DynamicJoystick>();
         nickname.text = view.Owner.NickName;
         ready = false;
@@ -234,7 +234,16 @@ public class CarController : MonoBehaviourPun
                    // ChangeColor();
                 }
 
-               
+                if (Input.GetKey(KeyCode.L))
+                {
+                    LightOnOff();
+                   
+
+
+                    // SendCustomCarDate();
+                    // ChangeColor();
+                }
+
                 ApplyLocalPositionToVisuals(axleInfo.leftWheel);
                 ApplyLocalPositionToVisuals(axleInfo.rightWheel);
 
@@ -244,6 +253,24 @@ public class CarController : MonoBehaviourPun
         }
     }
 
+    public void LightOnOff()
+    {
+        if(lightOn)
+        {
+            spotLights[0].intensity = 0;
+            spotLights[1].intensity = 0;
+            lightOn = false;
+        }
+        else
+        {
+            spotLights[0].intensity = 1000;
+            spotLights[1].intensity = 1000;
+            lightOn = true;
+        }
+        
+    }
+
+    
 
     public void Respawn()
     {
@@ -271,6 +298,7 @@ public class CarController : MonoBehaviourPun
 
     }
 
+   
 
 
 
@@ -312,39 +340,6 @@ public class CarController : MonoBehaviourPun
 
 }
 
-
-/*private void NetworkingClient_EventRecived(EventData obj)
-{
-    if (obj.Code == COLOR_CHANGE_EVENT)
-    {
-        object[] datas = (object[])obj.CustomData;
-        float r = (float)datas[0];
-        float g = (float)datas[1];
-        float b = (float)datas[2];
-        var carMaterialList = gameObject.GetComponent<MeshRenderer>();
-        foreach (Material item in carMaterialList.materials)
-        {
-            item.color = new Color(r, g, b, 1f);
-        }
-    }
-}
-
-private void ChangeColor()
-{
-    float r = Random.Range(0f, 1f);
-    float g = Random.Range(0f, 1f);
-    float b = Random.Range(0f, 1f);
-    var carMaterialList = gameObject.GetComponent<MeshRenderer>();
-    foreach (Material item in carMaterialList.materials)
-    {
-        item.color = new Color(r, g, b, 1f);
-    }
-
-    object[] datas = new object[] { r, g, b };
-
-    PhotonNetwork.RaiseEvent(COLOR_CHANGE_EVENT, datas, RaiseEventOptions.Default, SendOptions.SendUnreliable);
-
-}*/
 
 
 

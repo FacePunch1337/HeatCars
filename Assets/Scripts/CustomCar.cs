@@ -11,8 +11,10 @@ using System;
 using UnityEngine.Rendering;
 using UnityEngine.EventSystems;
 
+
 public class CustomCar : MonoBehaviourPun
 {
+    private int sceneNum;
     //RiseEvent
 
     /*private const byte COLOR_CHANGE_EVENT = 0;
@@ -98,7 +100,7 @@ public class CustomCar : MonoBehaviourPun
 
     }*/
 
-    
+
     private Color _color;
 
     private int current_color;
@@ -106,8 +108,11 @@ public class CustomCar : MonoBehaviourPun
     private bool neon;
     private void Start()
     {
-        PhotonNetwork.ConnectUsingSettings();
-        PlayerPrefs.SetInt("SelectedColor", current_color);
+        
+            //PhotonNetwork.ConnectUsingSettings();
+            //PlayerPrefs.SetInt("SelectedColor", current_color);
+        
+        
     }
 
     public void SendColor(Color color, bool neon)
@@ -165,9 +170,10 @@ public class CustomCar : MonoBehaviourPun
                 // PlayerPrefs.SetInt("CarColor", current_car);
             }
         }
-        
 
 
+       
+       
         PlayerPrefs.SetInt("SelectedColor", current_color);
 
 

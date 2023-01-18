@@ -1,7 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
+
 using UnityEngine;
 using Photon.Pun;
+
 
 public class CarSelect : MonoBehaviour
 {
@@ -18,7 +20,8 @@ public class CarSelect : MonoBehaviour
 
     private void Start()
     {
-        PhotonNetwork.ConnectUsingSettings();
+        
+        //PhotonNetwork.ConnectUsingSettings();
         current_car = 0;
         PlayerPrefs.SetInt("SelectedCar", current_car);
 

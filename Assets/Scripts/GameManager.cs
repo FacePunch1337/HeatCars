@@ -147,8 +147,8 @@ public class GameManager : MonoBehaviourPun
 
     public void QuitButton()
     {
-        PhotonNetwork.LeaveRoom();
         SceneManager.LoadScene(0);
+        PhotonNetwork.LeaveRoom();
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
     }

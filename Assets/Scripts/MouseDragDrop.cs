@@ -18,7 +18,7 @@ public class MouseDragDrop : MonoBehaviourPun
     private float selectionDistance;
     private float colliderDistance;
     private GameManager gm;
-    [SerializeField] public GameObject spawnObject;
+    [SerializeField] public GameObject[] spawnObjects;
 
 
     void Start()
@@ -158,7 +158,7 @@ public class MouseDragDrop : MonoBehaviourPun
         
         Vector3 spawnPos = new Vector3(spawnPoint[0], spawnPoint[1], spawnPoint[2]);
         Vector3 worldPos = Camera.main.ScreenToWorldPoint(spawnPos);
-        Instantiate(spawnObject, worldPos, Quaternion.identity);
+        Instantiate(spawnObjects[0], worldPos, Quaternion.identity);
         Debug.Log("Spawn");
         collider = null;
     }

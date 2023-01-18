@@ -81,8 +81,8 @@ public class ConnectToServer : MonoBehaviourPunCallbacks
 
     public void Exit()
     {
-        menuCanvas.enabled = true;
-        PhotonNetwork.LeaveRoom();
+        /*menuCanvas.enabled = true;
+        PhotonNetwork.LeaveRoom();*/
         Application.Quit();
     }
 
