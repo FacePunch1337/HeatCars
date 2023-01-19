@@ -21,8 +21,8 @@ public class ParkingCheck : MonoBehaviour
         
         if (other.CompareTag("Car"))
         {
-            
-            
+
+            this.gameObject.GetComponent<BoxCollider>().enabled = false;
         }
         else return;
        
@@ -31,7 +31,7 @@ public class ParkingCheck : MonoBehaviour
     {
         if (other.CompareTag("Car"))
         {
-          //  gameObject.SetActive(true);
+            this.gameObject.GetComponent<BoxCollider>().enabled = true;
         }
         else return;
     }*/

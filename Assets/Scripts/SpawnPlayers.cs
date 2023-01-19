@@ -50,7 +50,8 @@ public class SpawnPlayers : MonoBehaviour
             isFirstPlayer = false;
             
             Transform randomTransform = spawnPoints[Random.Range(0, spawnPoints.Length)];
-           
+            
+
             _spawnedCar = PhotonNetwork.Instantiate(cars[selectedCar].name, randomTransform.position, randomTransform.rotation);
              GameObject.Find("CM FreeLook1").GetComponent<FollowCamera>().Attach(_spawnedCar.transform);
              
