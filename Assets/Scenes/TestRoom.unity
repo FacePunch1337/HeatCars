@@ -38312,6 +38312,7 @@ MonoBehaviour:
   buttonStart: {fileID: 9152385212539638189}
   modPanel: {fileID: 842878918}
   textReadyCount: {fileID: 9152385212941470777}
+  start: 0
   readyCount: 0
 --- !u!1001 &1194774852
 PrefabInstance:

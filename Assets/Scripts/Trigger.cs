@@ -40,8 +40,7 @@ public class Trigger : MonoBehaviourPun
     {
         if (start)
         {
-            otherColider.gameObject.TryGetComponent(out CarController carController);
-            carController.SendTeleport();
+            
             start = false;
         }
         else return;

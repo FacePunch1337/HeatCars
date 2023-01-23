@@ -23,6 +23,7 @@ public class GameManager : MonoBehaviourPun
     public bool first_press = true;
     public bool menu = false;
     public bool adminPanelOpen = false;
+    public bool modStart = false;
    
 
 
@@ -119,8 +120,9 @@ public class GameManager : MonoBehaviourPun
         GameObject.Find("Trigger").TryGetComponent(out Trigger trigger);
         if (trigger.readyCount == PhotonNetwork.PlayerList.Length)
         {
+
             trigger.start = true;
-            
+            modStart = trigger.start;
             PhotonNetwork.CurrentRoom.IsOpen = false;
             
         }

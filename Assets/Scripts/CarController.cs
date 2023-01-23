@@ -234,6 +234,8 @@ public class CarController : MonoBehaviourPun
                    // ChangeColor();
                 }
 
+               
+
                 if (Input.GetKey(KeyCode.L))
                 {
                     LightOnOff();
@@ -247,9 +249,20 @@ public class CarController : MonoBehaviourPun
                 ApplyLocalPositionToVisuals(axleInfo.leftWheel);
                 ApplyLocalPositionToVisuals(axleInfo.rightWheel);
 
+               
 
-                
             }
+
+            if (GameObject.Find("GameManager").TryGetComponent(out GameManager gameManager))
+            {
+                if (gameManager.modStart)
+                {
+                    SendTeleport();
+                    gameManager.modStart = false;
+                }
+                else return;
+            }
+            else return;
         }
     }
 
@@ -287,6 +300,7 @@ public class CarController : MonoBehaviourPun
     public void SendTeleport()
     {
         photonView.RPC("TeleportToKingOfTheBridge", RpcTarget.AllBuffered);
+
     }
 
     [PunRPC]
