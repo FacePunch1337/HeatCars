@@ -23,11 +23,12 @@ public class GameManager : MonoBehaviourPun
     public bool first_press = true;
     public bool menu = false;
     public bool adminPanelOpen = false;
-    
+   
 
 
     void Start()
     {
+        
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
         menuPanel.SetActive(false);
@@ -118,8 +119,8 @@ public class GameManager : MonoBehaviourPun
         GameObject.Find("Trigger").TryGetComponent(out Trigger trigger);
         if (trigger.readyCount == PhotonNetwork.PlayerList.Length)
         {
-           
-            PhotonNetwork.LoadLevel(2);
+            trigger.start = true;
+            
             PhotonNetwork.CurrentRoom.IsOpen = false;
             
         }

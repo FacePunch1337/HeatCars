@@ -284,6 +284,24 @@ public class CarController : MonoBehaviourPun
         
     }
 
+    public void SendTeleport()
+    {
+        photonView.RPC("TeleportToKingOfTheBridge", RpcTarget.AllBuffered);
+    }
+
+    [PunRPC]
+    public void TeleportToKingOfTheBridge()
+    {
+
+        GameObject.Find("ModManager").TryGetComponent(out ModManager modManager);
+        var randomSpawnPos = modManager.spawnPoints[Random.Range(0, modManager.spawnPoints.Length)].transform.position;
+        transform.position = new Vector3(randomSpawnPos.x, randomSpawnPos.y, randomSpawnPos.z);
+        transform.rotation = new Quaternion(0, 0, 0, 0);
+        rigidbody.velocity = new Vector3(0, 0, 0);
+
+
+    }
+
 
 
 

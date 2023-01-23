@@ -11,23 +11,24 @@ public class Trigger : MonoBehaviourPun
 {
 
 
-
+    
     private CustomCar customCar;
     private PhotonView _otherPhotonView;
+    private Collider otherColider;
     //public GameObject buttonReady;
     public GameObject buttonStart;
     public GameObject modPanel;
     public GameObject textReadyCount;
-    
-    private bool start;
+   
+    public bool start;
     public int readyCount = 0;
-
+    
     public PhotonView otherPhotonView { get { return _otherPhotonView; } set { _otherPhotonView = value; } }
-
+    
     private void Start()
     {
-        
-       
+
+        start = false;
         buttonStart.SetActive(false);
         modPanel.SetActive(false);
 
@@ -37,13 +38,21 @@ public class Trigger : MonoBehaviourPun
     }
     private void Update()
     {
-        
+        if (start)
+        {
+            otherColider.gameObject.TryGetComponent(out CarController carController);
+            carController.SendTeleport();
+            start = false;
+        }
+        else return;
     }
     private void OnTriggerEnter(Collider other) 
     {
         if (other.gameObject.CompareTag("Car")) 
         {
+           
             readyCount++;
+            
         } 
         else return;
 
@@ -83,12 +92,13 @@ public class Trigger : MonoBehaviourPun
         if (other.gameObject.CompareTag("Car"))
         {
             readyCount--;
+            
             modPanel.SetActive(false);
             //buttonStart.SetActive(false);
             //buttonReady.SetActive(false);
             Cursor.visible = false;
             Cursor.lockState = CursorLockMode.Locked;
-
+            
         }
         else return;
 
