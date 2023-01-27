@@ -66,6 +66,11 @@ MonoBehaviour:
   - EngineStartSound
   - SkirtSound
   - TeleportToKingOfTheBridge
+  - StartMode
+  - StartModeKOB
+  - Respawn
+  - Teleport
+  - GetMessage
   DisableAutoOpenWizard: 1
   ShowSettings: 0
   DevRegionSetOnce: 1

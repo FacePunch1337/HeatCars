@@ -20,7 +20,7 @@ public class Trigger : MonoBehaviourPun
     public GameObject modPanel;
     public GameObject textReadyCount;
    
-    public bool start;
+    public bool _modStartFlag;
     public int readyCount = 0;
     
     public PhotonView otherPhotonView { get { return _otherPhotonView; } set { _otherPhotonView = value; } }
@@ -28,7 +28,7 @@ public class Trigger : MonoBehaviourPun
     private void Start()
     {
 
-        start = false;
+       
         buttonStart.SetActive(false);
         modPanel.SetActive(false);
 
@@ -38,12 +38,7 @@ public class Trigger : MonoBehaviourPun
     }
     private void Update()
     {
-        if (start)
-        {
-            
-            start = false;
-        }
-        else return;
+       
     }
     private void OnTriggerEnter(Collider other) 
     {
@@ -51,6 +46,7 @@ public class Trigger : MonoBehaviourPun
         {
            
             readyCount++;
+            
             
         } 
         else return;

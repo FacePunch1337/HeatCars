@@ -9,33 +9,33 @@ using Smooth;
 using System;
 using TMPro;
 using static Cinemachine.CinemachineTriggerAction.ActionSettings;
+using System.Runtime.CompilerServices;
 
 public class GameManager : MonoBehaviourPun
 {
 
-    private new PhotonView photonView;
-    
-    public GameObject menuPanel;
-    public GameObject adminPanel;
-    public GameObject customPanel;
-    //public GameObject policeCar;
 
-    public bool first_press = true;
+    private PhotonView photonView;
     public bool menu = false;
     public bool adminPanelOpen = false;
-    public bool modStart = false;
-   
+
+    [SerializeField] private GameObject menuPanel;
+    [SerializeField] private GameObject adminPanel;
+    private ModManager _modManager;
+    public ModManager modManager { get { return _modManager; } set { _modManager = value; } }
 
 
     void Start()
     {
-        
+        _modManager = gameObject.GetComponent<ModManager>();
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
         menuPanel.SetActive(false);
         adminPanel.SetActive(false);
         photonView = GetComponent<PhotonView>();
         PhotonNetwork.AutomaticallySyncScene = true;
+        
+
     }
 
 
@@ -92,19 +92,7 @@ public class GameManager : MonoBehaviourPun
 
         }
 
-        if (Input.GetKeyDown(KeyCode.C))
-        {
-            Cursor.visible = true;
-            Cursor.lockState = CursorLockMode.None;
-            customPanel.SetActive(true);
-        }
-        if (Input.GetKeyUp(KeyCode.C))
-        {
-            Cursor.visible = false;
-            Cursor.lockState = CursorLockMode.Locked;
-            customPanel.SetActive(true);
-        }
-
+       
 
         /*if (Input.GetKey(KeyCode.P))
         {
@@ -114,39 +102,11 @@ public class GameManager : MonoBehaviourPun
     }
 
 
-    public void StartMode()
-    {
-       
-        GameObject.Find("Trigger").TryGetComponent(out Trigger trigger);
-        if (trigger.readyCount == PhotonNetwork.PlayerList.Length)
-        {
-
-            trigger.start = true;
-            modStart = trigger.start;
-            PhotonNetwork.CurrentRoom.IsOpen = false;
-            
-        }
 
 
-    }
+  
 
-
-    public void SendEndGameMode()
-    {
-        photonView.RPC("EndGameMode", RpcTarget.AllBuffered);
-    }
-
-    [PunRPC]
-    public void EndGameMode()
-    {
-
-        PhotonNetwork.LeaveRoom();
-        SceneManager.LoadScene(0);
-        Cursor.visible = true;
-        Cursor.lockState = CursorLockMode.None;
-
-        
-    }
+   
 
     public void QuitButton()
     {

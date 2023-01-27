@@ -44,6 +44,9 @@ public class CarController : MonoBehaviourPun
     [SerializeField] private Light[] spotLights;
     private bool lightOn;
 
+    private GameManager gameManager;
+    private ModManager modManager;
+    private SpawnPlayers spawn;
 
     public void Start()
     {
@@ -54,6 +57,17 @@ public class CarController : MonoBehaviourPun
         //joystick = GameObject.Find("Dynamic Joystick").GetComponent<DynamicJoystick>();
         nickname.text = view.Owner.NickName;
         ready = false;
+
+        GameObject.Find("GameManager").TryGetComponent(out GameManager _gameManager);
+        gameManager = _gameManager;
+
+        gameManager.TryGetComponent(out ModManager _modManager);
+        modManager = _modManager;
+
+        gameManager.TryGetComponent(out SpawnPlayers _spawn);
+        spawn = _spawn;
+
+
 
         //collision = GetComponent<Collision>();
 
@@ -227,10 +241,12 @@ public class CarController : MonoBehaviourPun
 
                 }
 
-                if (Input.GetKeyDown(KeyCode.R))
+                if (Input.GetKeyDown(KeyCode.R) && !modManager.startMod)
                 {
-                    Respawn();
-                   // SendCustomCarDate();
+                    var randomSpawnPos = spawn.spawnPoints[Random.Range(0, spawn.spawnPoints.Length)].transform.position;
+                    float[] coords = { randomSpawnPos[0], randomSpawnPos[1], randomSpawnPos[2] };
+                    Teleport(coords);
+                           // SendCustomCarDate();
                    // ChangeColor();
                 }
 
@@ -238,12 +254,17 @@ public class CarController : MonoBehaviourPun
 
                 if (Input.GetKey(KeyCode.L))
                 {
-                    LightOnOff();
+                   // LightOnOff();
                    
 
 
                     // SendCustomCarDate();
                     // ChangeColor();
+                }
+
+                if (Input.GetKeyDown(KeyCode.T))
+                {
+                    //SendTeleport();
                 }
 
                 ApplyLocalPositionToVisuals(axleInfo.leftWheel);
@@ -253,19 +274,27 @@ public class CarController : MonoBehaviourPun
 
             }
 
-            if (GameObject.Find("GameManager").TryGetComponent(out GameManager gameManager))
-            {
-                if (gameManager.modStart)
-                {
-                    SendTeleport();
-                    gameManager.modStart = false;
-                }
-                else return;
-            }
-            else return;
+           
         }
-    }
+        if (modManager.teleportToMod)
+        {
 
+            TeleportTo();
+            
+            modManager.teleportToMod = false;
+
+        }
+        if (modManager.teleportToSpawn)
+        {
+
+            TeleportTo();
+            
+            modManager.teleportToSpawn = false;
+
+        }
+        //else return;
+    }
+    
     public void LightOnOff()
     {
         if(lightOn)
@@ -283,39 +312,56 @@ public class CarController : MonoBehaviourPun
         
     }
 
-    
 
-    public void Respawn()
+    public void TeleportTo()
     {
-        
-            GameObject.Find("GameManager").TryGetComponent(out SpawnPlayers spawn);
-            var randomSpawnPos = spawn.spawnPoints[Random.Range(0, spawn.spawnPoints.Length)].transform.position; 
-            transform.position = new Vector3(randomSpawnPos.x, randomSpawnPos.y, randomSpawnPos.z);
-            transform.rotation = new Quaternion (0,0,0,0);
-            rigidbody.velocity = new Vector3(0, 0, 0);
+        Vector3 randomSpawnPos;
+        if (modManager.teleportToMod)
+        {
+            randomSpawnPos = modManager.spawnPoints[Random.Range(0, modManager.spawnPoints.Length)].transform.position;
+            SendTeleport(randomSpawnPos);
             
+        }
         
+        if (modManager.teleportToSpawn)
+        {
+            randomSpawnPos = spawn.spawnPoints[Random.Range(0, spawn.spawnPoints.Length)].transform.position;
+            SendTeleport(randomSpawnPos);
+            
+        }
+        
+
+    }
+    public void SendTeleport(Vector3 randomSpawnPos)
+    {
+
+        float[] points = { randomSpawnPos[0], randomSpawnPos[1], randomSpawnPos[2] };
+        photonView.RPC("Teleport", RpcTarget.All, points);
+
     }
 
-    public void SendTeleport()
+    /*public void SendTeleport(SpawnPlayers _spawn)
     {
-        photonView.RPC("TeleportToKingOfTheBridge", RpcTarget.AllBuffered);
+        _spawn = spawn;
+        
+        var randomSpawnPos = _spawn.spawnPoints[Random.Range(0, _spawn.spawnPoints.Length)].transform.position;
+        float[] points = { randomSpawnPos.x, randomSpawnPos.y, randomSpawnPos.z };
+        photonView.RPC("Teleport", RpcTarget.All, points);
 
-    }
+    }*/
 
-    [PunRPC]
-    public void TeleportToKingOfTheBridge()
+    [PunRPC]   
+    public void Teleport(float[] randomSpawnPos)
     {
-
-        GameObject.Find("ModManager").TryGetComponent(out ModManager modManager);
-        var randomSpawnPos = modManager.spawnPoints[Random.Range(0, modManager.spawnPoints.Length)].transform.position;
-        transform.position = new Vector3(randomSpawnPos.x, randomSpawnPos.y, randomSpawnPos.z);
+        
+        transform.position = new Vector3(randomSpawnPos[0], randomSpawnPos[1], randomSpawnPos[2]);
         transform.rotation = new Quaternion(0, 0, 0, 0);
         rigidbody.velocity = new Vector3(0, 0, 0);
-
+       
 
     }
 
+    
 
 
 
