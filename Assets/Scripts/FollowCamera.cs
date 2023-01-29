@@ -37,7 +37,7 @@ public class FollowCamera : MonoBehaviour
      }
 
     // Update is called once per frame
-    void FixedUpdate()
+    void Update()
     {
         
         /*float aimX = Input.GetAxis("Mouse X");

@@ -15,6 +15,8 @@ using System.Xml.Serialization;
 using UnityEngine.EventSystems;
 using System.Data;
 using UnityEngine.Experimental.GlobalIllumination;
+using System;
+
 //using System.Drawing;
 
 //using static CarController;
@@ -24,6 +26,8 @@ using UnityEngine.Experimental.GlobalIllumination;
 public class CarController : MonoBehaviourPun
 {
     public TextMeshPro nickname { get { return _nickname; } set { _nickname = value; } }
+   
+    
     public List<AxleInfo> axleInfos;
     public Transform carTransform;
     public new Rigidbody rigidbody;
@@ -33,6 +37,7 @@ public class CarController : MonoBehaviourPun
     public bool ready;
     private PhotonView view;
     private TextMeshPro _nickname;
+   
    //private Joystick joystick;
     private float motor;
     private float steering;
@@ -42,24 +47,34 @@ public class CarController : MonoBehaviourPun
     private const byte COLOR_CHANGE_EVENT = 0;
     [SerializeField] private Material carBodyMaterial;
     [SerializeField] private Light[] spotLights;
+    [SerializeField] public TextMeshPro myMessage;
+    
     private bool lightOn;
 
     private GameManager gameManager;
     private ModManager modManager;
+    private Chat chat;
     private SpawnPlayers spawn;
-
+    
     public void Start()
     {
+        myMessage.text = string.Empty;
         lightOn = false;
         view = GetComponent<PhotonView>();
         nickname = GetComponentInChildren<TextMeshPro>();
         spotLights = GetComponents<Light>();
         //joystick = GameObject.Find("Dynamic Joystick").GetComponent<DynamicJoystick>();
         nickname.text = view.Owner.NickName;
+        
         ready = false;
 
         GameObject.Find("GameManager").TryGetComponent(out GameManager _gameManager);
+        GameObject.Find("ChatPanel").TryGetComponent(out Chat _chat);
+        //gameObject.TryGetComponent(out Message _message);
         gameManager = _gameManager;
+        chat = _chat;
+        //message = _message;
+        
 
         gameManager.TryGetComponent(out ModManager _modManager);
         modManager = _modManager;
@@ -115,14 +130,27 @@ public class CarController : MonoBehaviourPun
         currentSpeed = rigidbody.velocity.magnitude;
 
 
-        
+
+
+
+
+        if (photonView.Owner.IsLocal)
+        {
+            SendRoomChat();
+        }
+
+
+
+
+
+
         //Debug.Log(currentSpeed);
         if (view.IsMine)
         {
             //steering = (joystick.Vertical + joystick.Horizontal) * maxSteeringAngle;
-            
+
             //motor = joystick.Vertical  * (maxSteeringAngle + maxMotorTorque) * joystick.Horizontal;
-            
+           
             motor = maxMotorTorque * Input.GetAxis("Vertical");
             steering = maxSteeringAngle * Input.GetAxis("Horizontal");
 
@@ -241,15 +269,20 @@ public class CarController : MonoBehaviourPun
 
                 }
 
-                if (Input.GetKeyDown(KeyCode.R) && !modManager.startMod)
+                if (Input.GetKeyDown(KeyCode.R))
                 {
-                    var randomSpawnPos = spawn.spawnPoints[Random.Range(0, spawn.spawnPoints.Length)].transform.position;
-                    float[] coords = { randomSpawnPos[0], randomSpawnPos[1], randomSpawnPos[2] };
-                    Teleport(coords);
-                           // SendCustomCarDate();
-                   // ChangeColor();
+                    if (!modManager.startMod && !chat.chatOpen)
+                    {
+                        var randomSpawnPos = spawn.spawnPoints[UnityEngine.Random.Range(0, spawn.spawnPoints.Length)].transform.position;
+                        float[] coords = { randomSpawnPos[0], randomSpawnPos[1], randomSpawnPos[2] };
+                        Teleport(coords);
+                    }
+                    else return;
+                    
+                    // SendCustomCarDate();
+                    // ChangeColor();
                 }
-
+                
                
 
                 if (Input.GetKey(KeyCode.L))
@@ -294,7 +327,45 @@ public class CarController : MonoBehaviourPun
         }
         //else return;
     }
+
+
+
+    public void SendRoomChat()
+    {
+        if (chat.chatMessage != null)
+        { 
+            
+                photonView.RPC("RoomChat", RpcTarget.All, chat.chatMessage);
+            
+        }
+        //else Invoke("SendClearMessage", 3);
+   
+    }
+    [PunRPC]
+    public void RoomChat(string _message)
+    {
+        
+            myMessage.text = _message;
+        
+     
+        
+
+    }
     
+    private void SendClearMessage()
+    {
+        
+       
+        photonView.RPC("ClearMessage", RpcTarget.All, string.Empty);
+       
+      
+    }
+    [PunRPC]
+    public void ClearMessage(string empty)
+    {
+        myMessage.text = empty;
+    }
+
     public void LightOnOff()
     {
         if(lightOn)
@@ -313,19 +384,21 @@ public class CarController : MonoBehaviourPun
     }
 
 
+    
+
     public void TeleportTo()
     {
         Vector3 randomSpawnPos;
         if (modManager.teleportToMod)
         {
-            randomSpawnPos = modManager.spawnPoints[Random.Range(0, modManager.spawnPoints.Length)].transform.position;
+            randomSpawnPos = modManager.spawnPoints[UnityEngine.Random.Range(0, modManager.spawnPoints.Length)].transform.position;
             SendTeleport(randomSpawnPos);
             
         }
         
         if (modManager.teleportToSpawn)
         {
-            randomSpawnPos = spawn.spawnPoints[Random.Range(0, spawn.spawnPoints.Length)].transform.position;
+            randomSpawnPos = spawn.spawnPoints[UnityEngine.Random.Range(0, spawn.spawnPoints.Length)].transform.position;
             SendTeleport(randomSpawnPos);
             
         }

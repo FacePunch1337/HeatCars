@@ -19,8 +19,11 @@ public class GameManager : MonoBehaviourPun
     public bool menu = false;
     public bool adminPanelOpen = false;
 
+
     [SerializeField] private GameObject menuPanel;
     [SerializeField] private GameObject adminPanel;
+    private Chat _chat;
+    public Chat chat { get { return _chat; } set { _chat = value; } }
     private ModManager _modManager;
     public ModManager modManager { get { return _modManager; } set { _modManager = value; } }
 
@@ -34,8 +37,8 @@ public class GameManager : MonoBehaviourPun
         adminPanel.SetActive(false);
         photonView = GetComponent<PhotonView>();
         PhotonNetwork.AutomaticallySyncScene = true;
-        
-
+        gameObject.TryGetComponent(out Chat chat_);
+        _chat = chat_;
     }
 
 

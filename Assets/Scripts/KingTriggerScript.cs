@@ -18,15 +18,15 @@ public class KingTriggerScript : MonoBehaviourPun
     }
     private void OnTriggerEnter(Collider other)
     {
-        playerCount++;
-        /* if (other.gameObject.CompareTag("Car"))
-         {
-             other.gameObject.TryGetComponent(out CarController car);
-             kingName.text = car.nickname.text;
 
+        
+         if (other.gameObject.CompareTag("Car"))
+         {
+
+            playerCount++;
 
          }
-         else return;*/
+         else return;
 
     }
     private void OnTriggerStay(Collider other)
@@ -50,12 +50,10 @@ public class KingTriggerScript : MonoBehaviourPun
 
     private void OnTriggerExit(Collider other)
     {
-        playerCount--;
-        /*if (other.gameObject.CompareTag("Car"))
+        if (other.gameObject.CompareTag("Car"))
         {
-            //other.gameObject.TryGetComponent(out CarController car);
-            //kingName.text = string.Empty;
-          
+
+            playerCount--;
 
         }
         else return;

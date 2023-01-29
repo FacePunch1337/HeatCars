@@ -9,5 +9,5 @@ public class Message : MonoBehaviour
     public TMP_Text _my_message;
     // Start is called before the first frame update
     
-    void Start() => GetComponent<RectTransform>().SetAsLastSibling();
+    void Start() => GetComponent<RectTransform>().SetAsFirstSibling();
 }

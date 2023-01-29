@@ -2,6 +2,7 @@ using Photon.Pun;
 using System.Collections;
 using System.Collections.Generic;
 using System.Reflection;
+using TMPro;
 using UnityEngine;
 
 public class ModManager : MonoBehaviourPun
@@ -19,6 +20,7 @@ public class ModManager : MonoBehaviourPun
     private SpawnPlayers _spawner;
     private ModManager _modManager;
     private Trigger _trigger;
+    private KingTriggerScript kingTrigger;
 
     public bool startMod { get { return _startMod; } set { _startMod = value; } }
     public bool stopMod { get { return _stopMod; } set { _stopMod = value; } }
@@ -79,30 +81,36 @@ public class ModManager : MonoBehaviourPun
 
     public void StopMode()
     {
-        if (photonView.Owner.IsMasterClient)
-        {
-            GameObject.Find("KingTrigger").TryGetComponent(out KingTriggerScript kingTrigger);
+        
+            GameObject.Find("KingTrigger").TryGetComponent(out KingTriggerScript _kingTrigger);
+            kingTrigger = _kingTrigger;
             if (kingTrigger.kingName.text != string.Empty && kingTrigger.kingName.text != "?")
             {
 
-                //winnerBoard.GetComponent<TMPro> = $"{kingTrigger.kingName.text}" + " " + "won";
-
-
-                winnerBoard.SetActive(true);
+                winnerBoard.GetComponent<TMP_Text>().text = $"{kingTrigger.kingName.text}" + " " + "won";
+                
                 // if (car.GetComponent<PhotonView>().Owner.IsMasterClient && car.GetComponent<PhotonView>().AmOwner)
                 // {
-                UnityEngine.Cursor.visible = true;
-                UnityEngine.Cursor.lockState = CursorLockMode.None;
-                
-                //  }
-                return;
+                Cursor.visible = true;
+                Cursor.lockState = CursorLockMode.None;
+
+            //  }
+
                 winnerBoard.SetActive(true);
                 leaveModeButton.SetActive(true);
 
             }
+            else if(kingTrigger.kingName.text == string.Empty)
+            {
+                winnerBoard.GetComponent<TMP_Text>().text = "LOL";
+                Cursor.visible = true;
+                Cursor.lockState = CursorLockMode.None;
             
-        }
-        else return;
+                winnerBoard.SetActive(true);
+                leaveModeButton.SetActive(true);
+            }
+            
+       
        
     }
     public void SendEndGameMode()
@@ -121,8 +129,9 @@ public class ModManager : MonoBehaviourPun
     [PunRPC]
     public void EndGameMode(bool[] _params)
     {
+        kingTrigger.kingName.text = string.Empty;
         timerGameObject.SetActive(false);
-        
+        winnerBoard.SetActive(false);
         modManager.startMod = _params[0];
         modManager.teleportToSpawn = _params[1];
     }
