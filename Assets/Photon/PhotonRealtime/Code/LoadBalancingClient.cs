@@ -24,6 +24,7 @@ namespace Photon.Realtime
 
     #if SUPPORTED_UNITY
     using UnityEngine;
+    using UnityEngine.SceneManagement;
     using Debug = UnityEngine.Debug;
     #endif
     #if SUPPORTED_UNITY || NETFX_CORE
@@ -2571,6 +2572,8 @@ namespace Photon.Realtime
             if (level == DebugLevel.ERROR)
             {
                 Debug.LogError(message);
+               
+                
             }
             else if (level == DebugLevel.WARNING)
             {

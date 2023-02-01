@@ -37,7 +37,7 @@ public class GameManager : MonoBehaviourPun
         adminPanel.SetActive(false);
         photonView = GetComponent<PhotonView>();
         PhotonNetwork.AutomaticallySyncScene = true;
-        gameObject.TryGetComponent(out Chat chat_);
+        GameObject.Find("ChatPanel").TryGetComponent(out Chat chat_);
         _chat = chat_;
     }
 
@@ -72,28 +72,29 @@ public class GameManager : MonoBehaviourPun
 
         if (Input.GetKeyDown(KeyCode.Q))
         {
-            
-                if (!adminPanelOpen)
-                {
-                    adminPanel.SetActive(true);
-                    Cursor.visible = true;
-                    Cursor.lockState = CursorLockMode.None;
-                    adminPanelOpen = true;
-                }
-                else
-                {
 
-                    adminPanel.SetActive(false);
-                    Cursor.visible = false;
-                    Cursor.lockState = CursorLockMode.Locked;
-                    adminPanelOpen = false;
-                }
-            
-            
+            if (!adminPanelOpen && !chat.chatOpen)
+            {
+                adminPanel.SetActive(true);
+                Cursor.visible = true;
+                Cursor.lockState = CursorLockMode.None;
+                adminPanelOpen = true;
+            }
+            else
+            {
+
+                adminPanel.SetActive(false);
+                Cursor.visible = false;
+                Cursor.lockState = CursorLockMode.Locked;
+                adminPanelOpen = false;
+            }
+
+
 
 
 
         }
+        else return;
 
        
 

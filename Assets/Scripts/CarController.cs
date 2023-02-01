@@ -145,7 +145,7 @@ public class CarController : MonoBehaviourPun
 
 
         //Debug.Log(currentSpeed);
-        if (view.IsMine)
+        if (view.IsMine && !chat.chatOpen)
         {
             //steering = (joystick.Vertical + joystick.Horizontal) * maxSteeringAngle;
 

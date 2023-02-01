@@ -7,7 +7,16 @@ using UnityEngine.UI;
 public class Message : MonoBehaviour
 {
     public TMP_Text _my_message;
-    // Start is called before the first frame update
+    public Vector2 _my_message_height;
+  
     
-    void Start() => GetComponent<RectTransform>().SetAsFirstSibling();
+    void Start()
+    {
+        
+        gameObject.GetComponent<RectTransform>().sizeDelta = _my_message_height;
+        
+
+        GetComponent<RectTransform>().SetAsFirstSibling();
+    }
+    
 }

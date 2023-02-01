@@ -62,7 +62,7 @@ public class ModManager : MonoBehaviourPun
             modManager.teleportToMod = true;
             bool[] _params = { modManager.startMod, modManager.teleportToMod };
             photonView.RPC("StartModeKOB", RpcTarget.All, _params);
-            
+            PhotonNetwork.CurrentRoom.IsOpen = false;
         }
     }
 
@@ -122,6 +122,8 @@ public class ModManager : MonoBehaviourPun
         bool[] _params = {modManager.startMod, modManager.teleportToSpawn };
         photonView.RPC("EndGameMode", RpcTarget.All, _params);
         leaveModeButton.SetActive(false);
+
+        PhotonNetwork.CurrentRoom.IsOpen = true;
         
        
     }

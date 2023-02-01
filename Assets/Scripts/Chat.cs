@@ -6,7 +6,8 @@ using UnityEngine.UI;
 using TMPro;
 using UnityEngine.UIElements;
 using System;
-
+using UnityEngine.EventSystems;
+using System.Linq;
 
 public class Chat : MonoBehaviour
 {
@@ -24,62 +25,55 @@ public class Chat : MonoBehaviour
     private void Start()
     {
         chatOpen = false;
-        _input_field.gameObject.SetActive(false);
-        
+        _input_field.gameObject.SetActive(true);
+
     }
 
-    
+
 
     private void Update()
     {
-        
-            if (Input.GetKeyDown(KeyCode.Return))
+
+        if (Input.GetKeyDown(KeyCode.Return))
+        {
+            
+            if (!chatOpen)
             {
 
-                ChatMethod();
-
-            }
-
-            if (chatOpen)
-            {
+                //_input_field.gameObject.SetActive(true);
+               
+                _input_field.interactable = true;
+                _input_field.text = string.Empty;
                 _input_field.Select();
-            }
-            else return;
 
+                chatOpen = true;
+
+            }
+            else if (chatOpen && _input_field.text != string.Empty)
+            {
+
+
+                SendMessage();
+                _input_field.text = string.Empty;
+                _input_field.interactable = false;
+
+                //_input_field.gameObject.SetActive(false);
+                chatOpen = false;
+
+            }
+            else if (chatOpen && _input_field.text == string.Empty)
+            {
+                // _input_field.gameObject.SetActive(false);
+                _input_field.interactable = false;
+                chatOpen = false;
+
+            }
+
+
+        }
+        else return;
         
 
-
-    }
-
-    private void ChatMethod()
-    {
-        if (!chatOpen)
-         {
-
-             _input_field.gameObject.SetActive(true);
-            
-            
-            chatOpen = true;
-
-         }
-         else if (chatOpen && _input_field.text != string.Empty)
-         {
-             
-          
-             SendMessage();
-            _input_field.text = string.Empty;
-            _input_field.gameObject.SetActive(false);
-             chatOpen = false;
-         }
-         else if (chatOpen && _input_field.text == string.Empty)
-         {
-             _input_field.gameObject.SetActive(false);
-             chatOpen = false;
-
-         }
-         else return;
-
-       
     }
 
 
@@ -87,34 +81,70 @@ public class Chat : MonoBehaviour
     {
         string[] receive_messages = { $"{PhotonNetwork.LocalPlayer.ActorNumber}", $"{PhotonNetwork.NickName}: {_input_field.text}", $"{_input_field.text}" };
         GetComponent<PhotonView>().RPC("GetMessage", RpcTarget.AllBuffered, receive_messages);
-        
 
-       
-        
-        
-            
+
+
+
+
+
 
     }
 
     [PunRPC]
     public void GetMessage(string[] receive_messages)
     {
+
         
         GameObject M = Instantiate(_GO_message, Vector3.zero, Quaternion.identity, _content.transform);
-        
-        M.GetComponent<Message>()._my_message.text = $"[{receive_messages[0]}]" + " " + receive_messages[1];
 
-        if(receive_messages[0] == PhotonNetwork.LocalPlayer.ActorNumber.ToString())
+        M.GetComponent<Message>()._my_message.text = receive_messages[1];
+
+            if (receive_messages[1].Count() > 35)
+            {
+                M.GetComponent<Message>()._my_message_height.y = 40f;
+                
+            }
+      
+            else if (receive_messages[1].Count() > 25 )
+            {
+                M.GetComponent<Message>()._my_message_height.y = 20f;
+                
+            }
+            else
+            {
+                M.GetComponent<Message>()._my_message_height.y = 15f;
+                
+            }
+
+        scrollView.GetComponent<ScrollRect>().verticalNormalizedPosition -= 100;
+        if (receive_messages[0] == PhotonNetwork.LocalPlayer.ActorNumber.ToString())
+        {
+            
             _chatMessage = receive_messages[2];
+            //string last = _chatMessage;
+            //if (_chatMessage == last)
+           // {
+                Invoke("SendClearMyMessage", 3);
+           // }
+           
+            
+            
+        }
 
         
-
-
-
-
-
-
-
 
     }
+
+    public void SendClearMyMessage()
+    {
+        
+        string _params = string.Empty;
+        GetComponent<PhotonView>().RPC("ClearMyMessage", RpcTarget.All, _params);
+    }
+    [PunRPC]
+    public void ClearMyMessage(string _params)
+    {
+        _chatMessage = _params;
+    }
+
 }
