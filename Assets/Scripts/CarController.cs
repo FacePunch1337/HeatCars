@@ -31,7 +31,9 @@ public class CarController : MonoBehaviourPun
     public List<AxleInfo> axleInfos;
     public Transform carTransform;
     public new Rigidbody rigidbody;
-    
+    public Vector3 _centerOfmass;
+
+
     public float maxMotorTorque;
     public float maxSteeringAngle;
     public bool ready;
@@ -55,7 +57,8 @@ public class CarController : MonoBehaviourPun
     private ModManager modManager;
     private Chat chat;
     private SpawnPlayers spawn;
-    
+    RearWheelDrive rearWheelDrive;
+
     public void Start()
     {
         myMessage.text = string.Empty;
@@ -70,6 +73,8 @@ public class CarController : MonoBehaviourPun
 
         GameObject.Find("GameManager").TryGetComponent(out GameManager _gameManager);
         GameObject.Find("ChatPanel").TryGetComponent(out Chat _chat);
+        gameObject.TryGetComponent(out RearWheelDrive _rearWheelDrive);
+        rearWheelDrive = _rearWheelDrive;
         //gameObject.TryGetComponent(out Message _message);
         gameManager = _gameManager;
         chat = _chat;
@@ -83,6 +88,9 @@ public class CarController : MonoBehaviourPun
         spawn = _spawn;
 
 
+        rigidbody = GetComponent<Rigidbody>();
+        rigidbody.centerOfMass = _centerOfmass;
+        
 
         //collision = GetComponent<Collision>();
 
@@ -111,20 +119,20 @@ public class CarController : MonoBehaviourPun
 
 
 
-    /*public void TireEffect()
+    public void TireEffect()
     {
-        RearWheelDrive rearWheelDrive;
+        
 
-        foreach (var wheel in wheels)
+        foreach (var wheel in rearWheelDrive.wheels)
         {
-            if (Input.GetKey(KeyCode.Space))
+            if (currentSpeed > 100)
             {
                 rearWheelDrive.GetComponentInChildren<TrailRenderer>().emitting = true;
 
             }
             else rearWheelDrive.GetComponentInChildren<TrailRenderer>().emitting = false;
         }
-    }*/
+    }
     public void FixedUpdate()
     {
         currentSpeed = rigidbody.velocity.magnitude;
@@ -182,11 +190,11 @@ public class CarController : MonoBehaviourPun
 
                     else
                     {*/
-                        WheelFrictionCurve wheelFrictionCurve = new WheelFrictionCurve();
+                       /* WheelFrictionCurve wheelFrictionCurve = new WheelFrictionCurve();
 
-                        wheelFrictionCurve.extremumSlip = 2f;
+                        wheelFrictionCurve.extremumSlip = 0f;
                         wheelFrictionCurve.extremumValue = 2;
-                        wheelFrictionCurve.asymptoteSlip = 2;
+                        wheelFrictionCurve.asymptoteSlip = 0;
                         wheelFrictionCurve.asymptoteValue = 2;
                         wheelFrictionCurve.stiffness = 5;
 
@@ -194,7 +202,7 @@ public class CarController : MonoBehaviourPun
 
 
                         axleInfo.rightWheel.GetComponent<WheelCollider>().sidewaysFriction = wheelFrictionCurve;
-                        axleInfo.leftWheel.GetComponent<WheelCollider>().sidewaysFriction = wheelFrictionCurve;
+                        axleInfo.leftWheel.GetComponent<WheelCollider>().sidewaysFriction = wheelFrictionCurve;*/
                   //  }
 
 
@@ -203,9 +211,12 @@ public class CarController : MonoBehaviourPun
                 {
                     axleInfo.leftWheel.motorTorque = motor;
                     axleInfo.rightWheel.motorTorque = motor;
-                   
-
+                    
                 }
+
+
+
+
 
                 if (Input.GetKey(KeyCode.Space))
                 {
@@ -213,19 +224,19 @@ public class CarController : MonoBehaviourPun
                     
                     if (axleInfo.braking)
                     {
-                        axleInfo.rightWheel.GetComponent<WheelCollider>().brakeTorque = 2300;
-                        axleInfo.leftWheel.GetComponent<WheelCollider>().brakeTorque = 2300;
+                        axleInfo.rightWheel.GetComponent<WheelCollider>().brakeTorque = 3000;
+                        axleInfo.leftWheel.GetComponent<WheelCollider>().brakeTorque = 3000;
 
                        
                     }
 
                    WheelFrictionCurve wheelFrictionCurve = new WheelFrictionCurve();
 
-                        wheelFrictionCurve.extremumSlip = 3f;
-                        wheelFrictionCurve.extremumValue = 3;
-                        wheelFrictionCurve.asymptoteSlip = 4;
-                        wheelFrictionCurve.asymptoteValue = 3;
-                        wheelFrictionCurve.stiffness = 5;
+                        wheelFrictionCurve.extremumSlip = 0.5f;
+                        wheelFrictionCurve.extremumValue = 1f;
+                        wheelFrictionCurve.asymptoteSlip = 1f;
+                        wheelFrictionCurve.asymptoteValue = 0.75f;
+                        wheelFrictionCurve.stiffness = 2f;
 
 
 
@@ -235,10 +246,10 @@ public class CarController : MonoBehaviourPun
 
                     axleInfo.rightWheel.GetComponent<WheelCollider>().suspensionDistance = 0.1f;
                     axleInfo.leftWheel.GetComponent<WheelCollider>().suspensionDistance = 0.1f;
-                    
-                        
-                    
-                     
+
+                    //  TireEffect();
+
+
 
                 }
                
@@ -248,18 +259,19 @@ public class CarController : MonoBehaviourPun
                     axleInfo.leftWheel.GetComponent<WheelCollider>().brakeTorque = 0;
                     
                         WheelFrictionCurve wheelFrictionCurve = new WheelFrictionCurve();
-                       
-                        wheelFrictionCurve.extremumSlip = 2;
-                        wheelFrictionCurve.extremumValue = 2;
-                        wheelFrictionCurve.asymptoteSlip = 2;
-                        wheelFrictionCurve.asymptoteValue = 2;
-                        wheelFrictionCurve.stiffness = 5;
 
-                        
+                    wheelFrictionCurve.extremumSlip = 0.2f;
+                    wheelFrictionCurve.extremumValue = 1.5f;
+                    wheelFrictionCurve.asymptoteSlip = 0.5f;
+                    wheelFrictionCurve.asymptoteValue = 1.45f;
+                    wheelFrictionCurve.stiffness = 3f;
 
-                        
 
-                        axleInfo.rightWheel.GetComponent<WheelCollider>().sidewaysFriction = wheelFrictionCurve;
+
+
+
+
+                    axleInfo.rightWheel.GetComponent<WheelCollider>().sidewaysFriction = wheelFrictionCurve;
                         axleInfo.leftWheel.GetComponent<WheelCollider>().sidewaysFriction = wheelFrictionCurve;
 
                         axleInfo.rightWheel.GetComponent<WheelCollider>().suspensionDistance = 0.2f;
@@ -269,6 +281,8 @@ public class CarController : MonoBehaviourPun
 
                 }
 
+
+                
                 if (Input.GetKeyDown(KeyCode.R))
                 {
                     if (!modManager.startMod && !chat.chatOpen)
@@ -344,11 +358,10 @@ public class CarController : MonoBehaviourPun
     [PunRPC]
     public void RoomChat(string _message)
     {
+
+        myMessage.text = _message;
         
-            myMessage.text = _message;
-        
-     
-        
+
 
     }
     

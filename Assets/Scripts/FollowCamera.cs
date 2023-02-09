@@ -19,22 +19,28 @@ public class FollowCamera : MonoBehaviour
      public void Attach(Transform _transform)
      {
          vcam = GetComponent<CinemachineFreeLook>();
-
+        
         GameObject.Find("GameManager").TryGetComponent(out SpawnPlayers spawnPlayers);
-        var vcamRot = vcam.transform.rotation;
-        vcamRot.x = 180;
-         vcam.transform.parent = _transform;
-         vcam.transform.position = Vector3.zero;
-        vcam.transform.rotation = vcamRot;
+        Quaternion vcamRot = gameObject.transform.rotation;
+        vcamRot.y  = 180;
 
+        vcam.transform.parent = _transform;
+        vcam.transform.position = Vector3.zero;
+        vcam.transform.rotation = vcamRot;
+        vcam.m_XAxis.Value = 70f;
+        Debug.Log(vcam.m_XAxis.Value);
 
     }
 
      // Use this for initialization
      void Start()
      {
+       
         Application.targetFrameRate = 60;
-     }
+       
+       
+
+    }
 
     // Update is called once per frame
     void Update()

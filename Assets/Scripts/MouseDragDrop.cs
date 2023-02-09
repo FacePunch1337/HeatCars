@@ -158,7 +158,7 @@ public class MouseDragDrop : MonoBehaviourPun
     public void SendSpawnData(Vector3 spawnPos)
     {
         PropID = gameProps.propID;
-        float[] arrPoints = { spawnPos.x, spawnPos.y + 15, colliderDistance};
+        float[] arrPoints = { spawnPos.x, spawnPos.y, colliderDistance};
         photonView.RPC("SpawnObject", RpcTarget.AllBuffered, arrPoints);
         
     }
@@ -167,8 +167,8 @@ public class MouseDragDrop : MonoBehaviourPun
     public void SpawnObject(float[] spawnPoint)
     {
 
-        Debug.Log(PropID);
-        Vector3 spawnPos = new Vector3(spawnPoint[0], spawnPoint[1], spawnPoint[2]);
+        
+        Vector3 spawnPos = new Vector3(spawnPoint[0], spawnPoint[1] + 15, spawnPoint[2]);
         Vector3 worldPos = Camera.main.ScreenToWorldPoint(spawnPos);
         Instantiate(gameProps._props[PropID], worldPos, Quaternion.identity);
         //Debug.Log(gameProps._props[PropID]);

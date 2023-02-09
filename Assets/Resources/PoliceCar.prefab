@@ -641,6 +641,7 @@ MonoBehaviour:
     ackermanSteering: 1
   carTransform: {fileID: 7163319851833730783}
   rigidbody: {fileID: 7069131393245706162}
+  _centerOfmass: {x: 0, y: 0, z: 0}
   maxMotorTorque: 2300
   maxSteeringAngle: 20
   ready: 0

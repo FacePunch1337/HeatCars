@@ -17,6 +17,7 @@ public class Chat : MonoBehaviour
     public GameObject _content;
     public GameObject scrollView;
     private string _chatMessage;
+    private string _lastMassage;
     public string chatMessage { get { return _chatMessage; } set { _chatMessage = value; } }
     private string _chatId;
     public string chatId { get { return _chatId; } set { _chatId = value; } }
@@ -26,7 +27,7 @@ public class Chat : MonoBehaviour
     {
         chatOpen = false;
         _input_field.gameObject.SetActive(true);
-
+        
     }
 
 
@@ -56,7 +57,7 @@ public class Chat : MonoBehaviour
                 SendMessage();
                 _input_field.text = string.Empty;
                 _input_field.interactable = false;
-
+                
                 //_input_field.gameObject.SetActive(false);
                 chatOpen = false;
 
@@ -72,19 +73,22 @@ public class Chat : MonoBehaviour
 
         }
         else return;
-        
+
+       
+
+
 
     }
 
 
-    public void SendMessage()
+    public bool SendMessage()
     {
         string[] receive_messages = { $"{PhotonNetwork.LocalPlayer.ActorNumber}", $"{PhotonNetwork.NickName}: {_input_field.text}", $"{_input_field.text}" };
         GetComponent<PhotonView>().RPC("GetMessage", RpcTarget.AllBuffered, receive_messages);
 
+        return true;
 
-
-
+        
 
 
 
@@ -119,19 +123,23 @@ public class Chat : MonoBehaviour
         scrollView.GetComponent<ScrollRect>().verticalNormalizedPosition -= 100;
         if (receive_messages[0] == PhotonNetwork.LocalPlayer.ActorNumber.ToString())
         {
+
             
             _chatMessage = receive_messages[2];
-            //string last = _chatMessage;
-            //if (_chatMessage == last)
-           // {
-                Invoke("SendClearMyMessage", 3);
-           // }
-           
-            
-            
-        }
 
-        
+
+
+            Invoke("SendClearMyMessage", 3);
+            //if (_chatMessage == last)
+            // {
+
+            // }
+
+
+
+        }
+       
+
 
     }
 
@@ -144,7 +152,12 @@ public class Chat : MonoBehaviour
     [PunRPC]
     public void ClearMyMessage(string _params)
     {
+        
         _chatMessage = _params;
+
+
     }
+
+   
 
 }
