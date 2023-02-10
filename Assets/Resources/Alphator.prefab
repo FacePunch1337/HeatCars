@@ -2224,7 +2224,6 @@ GameObject:
   - component: {fileID: 1770534709226654468}
   - component: {fileID: 8051019205184640702}
   - component: {fileID: 829707220082679727}
-  - component: {fileID: 7796514314633534055}
   m_Layer: 0
   m_Name: lid
   m_TagString: Untagged
@@ -2311,22 +2310,6 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: -7699666271181864620, guid: c48674877d24a384b88d5ddc1870dc62, type: 3}
---- !u!54 &7796514314633534055
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7796514314633534052}
-  serializedVersion: 2
-  m_Mass: 50
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_UseGravity: 1
-  m_IsKinematic: 0
-  m_Interpolate: 1
-  m_Constraints: 48
-  m_CollisionDetection: 0
 --- !u!1 &8078727147501443002
 GameObject:
   m_ObjectHideFlags: 0
