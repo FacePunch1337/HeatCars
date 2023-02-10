@@ -627,8 +627,8 @@ MonoBehaviour:
     motor: 1
     steering: 0
     braking: 1
-    Antiroll: 1
-    ackermanSteering: 1
+    Antiroll: 1000
+    ackermanSteering: 1000
   - leftWheel: {fileID: 9149489957228190445}
     leftWheelVisuals: {fileID: 5836902243599897397}
     rightWheel: {fileID: 6347705838019454231}
@@ -637,8 +637,8 @@ MonoBehaviour:
     motor: 0
     steering: 1
     braking: 0
-    Antiroll: 1
-    ackermanSteering: 1
+    Antiroll: 1000
+    ackermanSteering: 1000
   carTransform: {fileID: 7163319851833730783}
   rigidbody: {fileID: 7069131393245706162}
   _centerOfmass: {x: 0, y: 0, z: 0}
@@ -699,7 +699,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f9f3c7d035dcfde4d891f15c09e914b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _centerOfMass: {x: 0, y: -1.6, z: 0}
+  _centerOfMass: {x: 0, y: -2.8, z: 0}
   Awake: 0
 --- !u!114 &1285617933142378711
 MonoBehaviour:
@@ -1427,14 +1427,14 @@ WheelCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5836902242442231112}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Center: {x: 0, y: 0.15, z: 0}
   m_Radius: 0.5
   m_SuspensionSpring:
-    spring: 10
-    damper: 10
+    spring: 1000
+    damper: 2000
     targetPosition: 0
   m_SuspensionDistance: 0.2
-  m_ForceAppPointDistance: 1
+  m_ForceAppPointDistance: 0
   m_Mass: 20
   m_WheelDampingRate: 3
   m_ForwardFriction:
@@ -1448,7 +1448,7 @@ WheelCollider:
     m_ExtremumValue: 2
     m_AsymptoteSlip: 2
     m_AsymptoteValue: 2
-    m_Stiffness: 5
+    m_Stiffness: 3
   m_Enabled: 1
 --- !u!1 &5836902243090899742
 GameObject:
@@ -1489,14 +1489,14 @@ WheelCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5836902243090899742}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Center: {x: 0, y: 0.15, z: 0}
   m_Radius: 0.5
   m_SuspensionSpring:
-    spring: 10
-    damper: 10
+    spring: 1000
+    damper: 2000
     targetPosition: 0
   m_SuspensionDistance: 0.2
-  m_ForceAppPointDistance: 1
+  m_ForceAppPointDistance: 0
   m_Mass: 20
   m_WheelDampingRate: 3
   m_ForwardFriction:
@@ -1510,7 +1510,7 @@ WheelCollider:
     m_ExtremumValue: 2
     m_AsymptoteSlip: 2
     m_AsymptoteValue: 2
-    m_Stiffness: 5
+    m_Stiffness: 3
   m_Enabled: 1
 --- !u!1 &5836902243495333671
 GameObject:
@@ -1551,14 +1551,14 @@ WheelCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5836902243495333671}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Center: {x: 0, y: 0.15, z: 0}
   m_Radius: 0.5
   m_SuspensionSpring:
-    spring: 10
-    damper: 10
+    spring: 1000
+    damper: 2000
     targetPosition: 0
   m_SuspensionDistance: 0.2
-  m_ForceAppPointDistance: 1
+  m_ForceAppPointDistance: 0
   m_Mass: 20
   m_WheelDampingRate: 3
   m_ForwardFriction:
@@ -1572,7 +1572,7 @@ WheelCollider:
     m_ExtremumValue: 2
     m_AsymptoteSlip: 2
     m_AsymptoteValue: 2
-    m_Stiffness: 5
+    m_Stiffness: 3
   m_Enabled: 1
 --- !u!1 &5836902243599897397
 GameObject:
@@ -1613,14 +1613,14 @@ WheelCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5836902243599897397}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Center: {x: 0, y: 0.15, z: 0}
   m_Radius: 0.5
   m_SuspensionSpring:
-    spring: 10
-    damper: 10
+    spring: 1000
+    damper: 2000
     targetPosition: 0
   m_SuspensionDistance: 0.2
-  m_ForceAppPointDistance: 1
+  m_ForceAppPointDistance: 0
   m_Mass: 20
   m_WheelDampingRate: 3
   m_ForwardFriction:
@@ -1634,7 +1634,7 @@ WheelCollider:
     m_ExtremumValue: 2
     m_AsymptoteSlip: 2
     m_AsymptoteValue: 2
-    m_Stiffness: 5
+    m_Stiffness: 3
   m_Enabled: 1
 --- !u!1 &6060453358758668441
 GameObject:
