@@ -16,9 +16,10 @@ public class Trigger : MonoBehaviourPun
     private PhotonView _otherPhotonView;
     private Collider otherColider;
     //public GameObject buttonReady;
-    public GameObject buttonStart;
-    public GameObject modPanel;
+   
     public GameObject textReadyCount;
+    public GameObject modManagerObj;
+    private ModManager modManager;
    
     public bool _modStartFlag;
     public int readyCount = 0;
@@ -28,9 +29,10 @@ public class Trigger : MonoBehaviourPun
     private void Start()
     {
 
+        modManagerObj.TryGetComponent(out ModManager _modManager);
+        modManager = _modManager;
+        
        
-        buttonStart.SetActive(false);
-        modPanel.SetActive(false);
 
         //buttonReady.SetActive(false);
 
@@ -44,8 +46,9 @@ public class Trigger : MonoBehaviourPun
     {
         if (other.gameObject.CompareTag("Car")) 
         {
-           
-            readyCount++;
+            modManager.mod = ModManager.Mod.KOB;
+             readyCount++;
+            
             
             
         } 
@@ -60,17 +63,17 @@ public class Trigger : MonoBehaviourPun
         {
             if (other.GetComponent<PhotonView>().Owner.IsMasterClient && other.GetComponent<PhotonView>().AmOwner)
             {
-                modPanel.SetActive(true);
+                modManager.modPanel.SetActive(true);
                 Cursor.visible = true;
                 Cursor.lockState = CursorLockMode.None;
                 
                 if (readyCount == PhotonNetwork.PlayerList.Length)
                 {
-                    buttonStart.SetActive(true);
+                    modManager.buttonStart.SetActive(true);
                 }
                 else
                 {
-                    buttonStart.SetActive(false);
+                    modManager.buttonStart.SetActive(false);
                 }
                 
             }
@@ -87,8 +90,8 @@ public class Trigger : MonoBehaviourPun
         if (other.gameObject.CompareTag("Car"))
         {
             readyCount--;
-            
-            modPanel.SetActive(false);
+
+            modManager.modPanel.SetActive(false);
             //buttonStart.SetActive(false);
             //buttonReady.SetActive(false);
             Cursor.visible = false;

@@ -35,6 +35,7 @@ public class GameManager : MonoBehaviourPun
         Cursor.lockState = CursorLockMode.Locked;
         menuPanel.SetActive(false);
         adminPanel.SetActive(false);
+
         photonView = GetComponent<PhotonView>();
         PhotonNetwork.AutomaticallySyncScene = true;
         GameObject.Find("ChatPanel").TryGetComponent(out Chat chat_);

@@ -287,9 +287,11 @@ public class CarController : MonoBehaviourPun
                 {
                     if (!modManager.startMod && !chat.chatOpen)
                     {
-                        var randomSpawnPos = spawn.spawnPoints[UnityEngine.Random.Range(0, spawn.spawnPoints.Length)].transform.position;
-                        float[] coords = { randomSpawnPos[0], randomSpawnPos[1], randomSpawnPos[2] };
-                        Teleport(coords);
+                        var randomSpawnPos = spawn.spawnPoints[UnityEngine.Random.Range(0, spawn.spawnPoints.Length)].transform;
+                        float[] posCoords = { randomSpawnPos.position[0], randomSpawnPos.position[1], randomSpawnPos.position[2]};
+             
+                        Teleport(posCoords);
+                        //gameObject.GetComponent<Transform>().Rotate(0, randomSpawnPos.rotation.y, 0);
                     }
                     else return;
                     
@@ -404,11 +406,18 @@ public class CarController : MonoBehaviourPun
         Vector3 randomSpawnPos;
         if (modManager.teleportToMod)
         {
-            randomSpawnPos = modManager.spawnPoints[UnityEngine.Random.Range(0, modManager.spawnPoints.Length)].transform.position;
+            switch (modManager)
+            {
+                default:
+                    break;
+            }
+            randomSpawnPos = modManager.spawnPointsKOB[UnityEngine.Random.Range(0, modManager.spawnPointsKOB.Length)].transform.position;
             SendTeleport(randomSpawnPos);
             
         }
+
         
+
         if (modManager.teleportToSpawn)
         {
             randomSpawnPos = spawn.spawnPoints[UnityEngine.Random.Range(0, spawn.spawnPoints.Length)].transform.position;
@@ -443,6 +452,7 @@ public class CarController : MonoBehaviourPun
         transform.position = new Vector3(randomSpawnPos[0], randomSpawnPos[1], randomSpawnPos[2]);
         transform.rotation = new Quaternion(0, 0, 0, 0);
         rigidbody.velocity = new Vector3(0, 0, 0);
+        //gameObject.GetComponent<Transform>().Rotate(0, 213, 0);
        
 
     }

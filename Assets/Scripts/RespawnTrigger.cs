@@ -27,17 +27,19 @@ public class RespawnTrigger : MonoBehaviour
              other.gameObject.TryGetComponent(out CarController car);
             if (!modManager.startMod)
             {
-                var randomSpawnPos = spawn.spawnPoints[UnityEngine.Random.Range(0, spawn.spawnPoints.Length)].transform.position;
-                float[] coords = { randomSpawnPos[0], randomSpawnPos[1], randomSpawnPos[2] };
+                var randomSpawnPos = spawn.spawnPoints[UnityEngine.Random.Range(0, spawn.spawnPoints.Length)].transform;
+                float[] posCoords = { randomSpawnPos.position[0], randomSpawnPos.position[1], randomSpawnPos.position[2] };
+                //float[] rotCoords = { randomSpawnPos.rotation[0], randomSpawnPos.rotation[1], randomSpawnPos.rotation[2] };
 
-                car.Teleport(coords);
+                car.Teleport(posCoords);
             }
             else if (modManager.startMod)
             {
-                var randomSpawnPos = modManager.spawnPoints[UnityEngine.Random.Range(0, modManager.spawnPoints.Length)].transform.position;
-                float[] coords = { randomSpawnPos[0], randomSpawnPos[1], randomSpawnPos[2] };
+                var randomSpawnPos = modManager.spawnPointsKOB[UnityEngine.Random.Range(0, modManager.spawnPointsKOB.Length)].transform;
+                float[] posCoords = { randomSpawnPos.position[0], randomSpawnPos.position[1], randomSpawnPos.position[2] };
+               // float[] rotCoords = { randomSpawnPos.rotation[0], randomSpawnPos.rotation[1], randomSpawnPos.rotation[2] };
 
-                car.Teleport(coords);
+                car.Teleport(posCoords);
             }
             
 

@@ -461,13 +461,13 @@ MonoBehaviour:
     suspDist: 0
     motor: 0
     steering: 1
-    braking: 0
+    braking: 1
     Antiroll: 1000
     ackermanSteering: 1000
   carTransform: {fileID: 7163319851833730783}
   rigidbody: {fileID: 7069131393245706162}
   _centerOfmass: {x: 0, y: -3.4, z: 0}
-  maxMotorTorque: 3000
+  maxMotorTorque: 1500
   maxSteeringAngle: 30
   ready: 0
   carBodyMaterial: {fileID: 2100000, guid: dce31ade14517294aa9d513da278eba8, type: 2}

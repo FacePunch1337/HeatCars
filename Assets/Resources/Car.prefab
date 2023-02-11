@@ -343,7 +343,7 @@ MonoBehaviour:
     rightWheel: {fileID: 6347705838019454231}
     rightWheelVisuals: {fileID: 5836902242442231112}
     suspDist: 0
-    motor: 0
+    motor: 1
     steering: 1
     braking: 1
     Antiroll: 1000
@@ -351,7 +351,7 @@ MonoBehaviour:
   carTransform: {fileID: 7163319851833730783}
   rigidbody: {fileID: 7069131393245706162}
   _centerOfmass: {x: 0, y: -2.8, z: 0}
-  maxMotorTorque: 3000
+  maxMotorTorque: 1700
   maxSteeringAngle: 20
   ready: 0
   carBodyMaterial: {fileID: 0}

@@ -9,7 +9,9 @@ public class ModManager : MonoBehaviourPun
 {
     // Start is called before the first frame update
 
-    [SerializeField] public GameObject[] spawnPoints;
+    [SerializeField] public GameObject[] spawnPointsKOB;
+    [SerializeField] public GameObject[] spawnPointsRace;
+    
 
     private bool _startMod;
     private bool _stopMod;
@@ -21,6 +23,12 @@ public class ModManager : MonoBehaviourPun
     private ModManager _modManager;
     private Trigger _trigger;
     private KingTriggerScript kingTrigger;
+    public GameObject modPanel;
+    public GameObject buttonStart;
+    public Mod mod;
+    public enum Mod { KOB, Race, None};
+   
+
 
     public bool startMod { get { return _startMod; } set { _startMod = value; } }
     public bool stopMod { get { return _stopMod; } set { _stopMod = value; } }
@@ -49,15 +57,18 @@ public class ModManager : MonoBehaviourPun
         leaveModeButton.SetActive(false);
         timerGameObject.SetActive(false);
         winnerBoard.SetActive(false);
-
+        modPanel.SetActive(false);
+        buttonStart.SetActive(false);
+        modManager.buttonStart.SetActive(false);
+        mod = Mod.None;
 
     }
     public void SendStartMod()
     {
-
+       
         if (trigger.readyCount == PhotonNetwork.PlayerList.Length)
         {
-
+            
             modManager.startMod = true;
             modManager.teleportToMod = true;
             bool[] _params = { modManager.startMod, modManager.teleportToMod };
@@ -79,7 +90,17 @@ public class ModManager : MonoBehaviourPun
 
     }
 
-    public void StopMode()
+    [PunRPC]
+    public void EndGameModeKOB(bool[] _params)
+    {
+        kingTrigger.kingName.text = string.Empty;
+        timerGameObject.SetActive(false);
+        winnerBoard.SetActive(false);
+        modManager.startMod = _params[0];
+        modManager.teleportToSpawn = _params[1];
+    }
+
+    public void StopModeKOB()
     {
         
             GameObject.Find("KingTrigger").TryGetComponent(out KingTriggerScript _kingTrigger);
@@ -113,6 +134,7 @@ public class ModManager : MonoBehaviourPun
        
        
     }
+
     public void SendEndGameMode()
     {
 
@@ -128,13 +150,5 @@ public class ModManager : MonoBehaviourPun
        
     }
 
-    [PunRPC]
-    public void EndGameMode(bool[] _params)
-    {
-        kingTrigger.kingName.text = string.Empty;
-        timerGameObject.SetActive(false);
-        winnerBoard.SetActive(false);
-        modManager.startMod = _params[0];
-        modManager.teleportToSpawn = _params[1];
-    }
+    
 }
