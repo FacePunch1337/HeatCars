@@ -66,7 +66,7 @@ public class GameManager : MonoBehaviourPun
                 Cursor.lockState = CursorLockMode.Locked;
                 menu = false;
             }
-           
+            
             
             
         }

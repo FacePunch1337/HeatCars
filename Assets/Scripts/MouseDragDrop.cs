@@ -33,6 +33,8 @@ public class MouseDragDrop : MonoBehaviourPun
             targetCamera = GameObject.Find("FollowCamera").GetComponent<Camera>();
         }
         
+        
+        
         GameObject.Find("GameManager").TryGetComponent(out GameManager gameManager);
         gm = gameManager;
         GameObject.Find("GameManager").TryGetComponent(out GameProps _gameProps);
@@ -48,7 +50,7 @@ public class MouseDragDrop : MonoBehaviourPun
         if (!targetCamera)
             return;
 
-        if (Input.GetMouseButtonDown(0) && photonView.Owner.IsMasterClient)
+        if (Input.GetMouseButtonDown(0))
         {
             selectedRigidbody = GetRigidbodyFromMouseClick();
         }
@@ -56,7 +58,7 @@ public class MouseDragDrop : MonoBehaviourPun
         {
             selectedRigidbody = null;
         }
-        if (Input.GetMouseButtonDown(1) && photonView.Owner.IsMasterClient)
+        if (Input.GetMouseButtonDown(1))
         {
             collider = GetFlatToSpawn();
         }
@@ -76,7 +78,7 @@ public class MouseDragDrop : MonoBehaviourPun
             
             if (gm.adminPanelOpen)
             {
-                if (photonView.Owner.IsMasterClient) { SendDragDropData(); }
+                SendDragDropData();
             }
 
             else return;
@@ -85,7 +87,7 @@ public class MouseDragDrop : MonoBehaviourPun
         {
             if (gm.adminPanelOpen)
             {
-                if (photonView.Owner.IsMasterClient) SendSpawnData(Input.mousePosition);
+                SendSpawnData(Input.mousePosition);
             }
 
         }
@@ -100,7 +102,7 @@ public class MouseDragDrop : MonoBehaviourPun
         bool hit = Physics.Raycast(ray, out hitInfo);
         if (hit)
         {
-            if (hitInfo.collider.gameObject.GetComponent<Rigidbody>() && photonView.Owner.IsLocal)
+            if (hitInfo.collider.gameObject.GetComponent<Rigidbody>())
             {
                 selectionDistance = Vector3.Distance(ray.origin, hitInfo.point);
                 originalScreenTargetPosition = targetCamera.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, selectionDistance));

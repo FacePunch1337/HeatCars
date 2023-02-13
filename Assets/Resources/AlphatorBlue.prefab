@@ -303,6 +303,7 @@ GameObject:
   - component: {fileID: 2131818899870048571}
   - component: {fileID: 1591472355117964889}
   - component: {fileID: 2370539434766371540}
+  - component: {fileID: 9160211462191604957}
   m_Layer: 0
   m_Name: Body
   m_TagString: Untagged
@@ -407,6 +408,22 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2131818899870048574}
   m_Mesh: {fileID: 0}
+--- !u!114 &9160211462191604957
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2131818899870048574}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64179f3720bbfe947b7724caa67b7c1d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SynchronizeVelocity: 1
+  m_SynchronizeAngularVelocity: 1
+  m_TeleportEnabled: 0
+  m_TeleportIfDistanceGreaterThan: 3
 --- !u!1 &2131818900444992884
 GameObject:
   m_ObjectHideFlags: 0
@@ -2479,6 +2496,7 @@ GameObject:
   - component: {fileID: 2131818900809302517}
   - component: {fileID: 1591472355117964871}
   - component: {fileID: 8767660627818301669}
+  - component: {fileID: 8529034813303550183}
   m_Layer: 0
   m_Name: lid
   m_TagString: Untagged
@@ -2617,3 +2635,19 @@ HingeJoint:
   m_EnablePreprocessing: 1
   m_MassScale: 10
   m_ConnectedMassScale: 1
+--- !u!114 &8529034813303550183
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8801374916840768574}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64179f3720bbfe947b7724caa67b7c1d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SynchronizeVelocity: 1
+  m_SynchronizeAngularVelocity: 1
+  m_TeleportEnabled: 0
+  m_TeleportIfDistanceGreaterThan: 3

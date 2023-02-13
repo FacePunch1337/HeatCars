@@ -1190,6 +1190,7 @@ GameObject:
   - component: {fileID: 6548837752120207452}
   - component: {fileID: 5864130295205214190}
   - component: {fileID: 4529323941112635724}
+  - component: {fileID: 9175859888270644202}
   m_Layer: 0
   m_Name: lid
   m_TagString: Untagged
@@ -1328,6 +1329,22 @@ HingeJoint:
   m_EnablePreprocessing: 1
   m_MassScale: 10
   m_ConnectedMassScale: 1
+--- !u!114 &9175859888270644202
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4418975823313956247}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64179f3720bbfe947b7724caa67b7c1d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SynchronizeVelocity: 1
+  m_SynchronizeAngularVelocity: 1
+  m_TeleportEnabled: 0
+  m_TeleportIfDistanceGreaterThan: 3
 --- !u!1 &5878340393170916061
 GameObject:
   m_ObjectHideFlags: 0
@@ -1673,6 +1690,7 @@ GameObject:
   - component: {fileID: 6548837753328421010}
   - component: {fileID: 5864130295205214192}
   - component: {fileID: 7463099884212003709}
+  - component: {fileID: 7283220486362730820}
   m_Layer: 0
   m_Name: Body
   m_TagString: Untagged
@@ -1777,6 +1795,22 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6548837753328421015}
   m_Mesh: {fileID: 0}
+--- !u!114 &7283220486362730820
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6548837753328421015}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64179f3720bbfe947b7724caa67b7c1d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SynchronizeVelocity: 1
+  m_SynchronizeAngularVelocity: 1
+  m_TeleportEnabled: 0
+  m_TeleportIfDistanceGreaterThan: 3
 --- !u!1 &6548837753351929275
 GameObject:
   m_ObjectHideFlags: 0
@@ -1829,7 +1863,9 @@ MonoBehaviour:
   Synchronization: 3
   OwnershipTransfer: 0
   observableSearch: 2
-  ObservedComponents: []
+  ObservedComponents:
+  - {fileID: 9175859888270644202}
+  - {fileID: 7283220486362730820}
   sceneViewId: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0

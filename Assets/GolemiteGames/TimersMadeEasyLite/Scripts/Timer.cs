@@ -5,9 +5,10 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using UnityEngine.Events;
+using Photon.Pun;
 
 
-public class Timer : MonoBehaviour
+public class Timer : MonoBehaviourPun
 {
     public UnityEvent onTimerEnd;
 
@@ -146,29 +147,42 @@ public class Timer : MonoBehaviour
     {
         if(timerRunning)
         {
-            if(countMethod == CountMethod.CountDown)
+
+            SendStartTimer();
+
+        }
+    }
+
+    public void SendStartTimer()
+    {
+        gameObject.GetPhotonView().RPC("Go", RpcTarget.AllBuffered);
+    }
+
+    [PunRPC]
+    public void Go()
+    {
+        if (countMethod == CountMethod.CountDown)
+        {
+            CountDown();
+            if (standardSlider)
             {
-                CountDown();
-                if(standardSlider)
-                {
-                    StandardSliderDown();
-                }
-                if(dialSlider)
-                {
-                    DialSliderDown();
-                }
+                StandardSliderDown();
             }
-            else
+            if (dialSlider)
             {
-                CountUp();
-                if (standardSlider)
-                {
-                    StandardSliderUp();
-                }
-                if(dialSlider)
-                {
-                    DialSliderUp();
-                }
+                DialSliderDown();
+            }
+        }
+        else
+        {
+            CountUp();
+            if (standardSlider)
+            {
+                StandardSliderUp();
+            }
+            if (dialSlider)
+            {
+                DialSliderUp();
             }
         }
     }

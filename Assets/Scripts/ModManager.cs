@@ -49,7 +49,7 @@ public class ModManager : MonoBehaviourPun
     private void Start()
     {
         gameObject.TryGetComponent(out ModManager _modManager);
-        gameObject.TryGetComponent(out TimerSystem _timerSystem);
+        
         GameObject.Find("Trigger").TryGetComponent(out Trigger _trigger);
         modManager = _modManager;
         trigger = _trigger;
@@ -73,7 +73,7 @@ public class ModManager : MonoBehaviourPun
             modManager.teleportToMod = true;
             bool[] _params = { modManager.startMod, modManager.teleportToMod };
             photonView.RPC("StartModeKOB", RpcTarget.All, _params);
-            PhotonNetwork.CurrentRoom.IsOpen = false;
+            
         }
     }
 
@@ -85,70 +85,80 @@ public class ModManager : MonoBehaviourPun
         modManager.startMod = _params[0];
         modManager.teleportToMod = _params[1];
         timerGameObject.SetActive(true);
-        
+        PhotonNetwork.CurrentRoom.IsOpen = false;
 
 
+    }
+
+    
+
+    public void SendStopModeKOB()
+    {
+        gameObject.GetPhotonView().RPC("StopModeKOB", RpcTarget.All);
+       
     }
 
     [PunRPC]
-    public void EndGameModeKOB(bool[] _params)
-    {
-        kingTrigger.kingName.text = string.Empty;
-        timerGameObject.SetActive(false);
-        winnerBoard.SetActive(false);
-        modManager.startMod = _params[0];
-        modManager.teleportToSpawn = _params[1];
-    }
 
     public void StopModeKOB()
     {
-        
-            GameObject.Find("KingTrigger").TryGetComponent(out KingTriggerScript _kingTrigger);
-            kingTrigger = _kingTrigger;
-            if (kingTrigger.kingName.text != string.Empty && kingTrigger.kingName.text != "?")
-            {
+        leaveModeButton.SetActive(true);
+        GameObject.Find("KingTrigger").TryGetComponent(out KingTriggerScript _kingTrigger);
+        kingTrigger = _kingTrigger;
+        if (kingTrigger.kingName.text != string.Empty && kingTrigger.kingName.text != "?")
+        {
 
-                winnerBoard.GetComponent<TMP_Text>().text = $"{kingTrigger.kingName.text}" + " " + "won";
-                
-                // if (car.GetComponent<PhotonView>().Owner.IsMasterClient && car.GetComponent<PhotonView>().AmOwner)
-                // {
-                Cursor.visible = true;
-                Cursor.lockState = CursorLockMode.None;
+            winnerBoard.GetComponent<TMP_Text>().text = $"{kingTrigger.kingName.text}" + " " + "won";
+
+            // if (car.GetComponent<PhotonView>().Owner.IsMasterClient && car.GetComponent<PhotonView>().AmOwner)
+            // {
+            Cursor.visible = true;
+            Cursor.lockState = CursorLockMode.None;
 
             //  }
 
-                winnerBoard.SetActive(true);
-                leaveModeButton.SetActive(true);
+            winnerBoard.SetActive(true);
+            
 
-            }
-            else if(kingTrigger.kingName.text == string.Empty)
-            {
-                winnerBoard.GetComponent<TMP_Text>().text = "LOL";
-                Cursor.visible = true;
-                Cursor.lockState = CursorLockMode.None;
+        }
+        else if (kingTrigger.kingName.text == string.Empty)
+        {
+            winnerBoard.GetComponent<TMP_Text>().text = "LOL";
+            Cursor.visible = true;
+            Cursor.lockState = CursorLockMode.None;
+
+            winnerBoard.SetActive(true);
             
-                winnerBoard.SetActive(true);
-                leaveModeButton.SetActive(true);
-            }
-            
-       
-       
+        }
     }
+
 
     public void SendEndGameMode()
     {
 
       
-        modManager.startMod = false;
-        modManager.teleportToSpawn = true;
-        bool[] _params = {modManager.startMod, modManager.teleportToSpawn };
-        photonView.RPC("EndGameMode", RpcTarget.All, _params);
-        leaveModeButton.SetActive(false);
-
-        PhotonNetwork.CurrentRoom.IsOpen = true;
+       
+        //bool[] _params = {modManager.startMod, modManager.teleportToSpawn };
+        photonView.RPC("EndGameMode", RpcTarget.All);
+        
+        
+       
         
        
     }
 
-    
+    [PunRPC]
+    public void EndGameMode()
+    {
+        modManager.startMod = false;
+        modManager.teleportToSpawn = true;
+        kingTrigger.kingName.text = string.Empty;
+        modManager.timerGameObject.SetActive(false);
+        modManager.leaveModeButton.SetActive(false);
+        modManager.timerGameObject.SetActive(false);
+        modManager.winnerBoard.SetActive(false);
+        PhotonNetwork.CurrentRoom.IsOpen = true;
+    }
+
+
 }
