@@ -11,7 +11,7 @@ using TMPro;
 using static Cinemachine.CinemachineTriggerAction.ActionSettings;
 using System.Runtime.CompilerServices;
 
-public class GameManager : MonoBehaviourPun
+public class GameManager : MonoBehaviourPunCallbacks
 {
 
 
@@ -107,19 +107,24 @@ public class GameManager : MonoBehaviourPun
     }
 
 
+    public void LeaveGameRoom()
+    {
 
+        PhotonNetwork.LeaveRoom();
 
-  
-
-   
-
-    public void QuitButton()
+    }
+    public override void OnLeftRoom()
     {
         SceneManager.LoadScene(0);
-        PhotonNetwork.LeaveRoom();
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
     }
+
+    
+
+
+
+  
 
     public void ResumeButton()
     {

@@ -409,7 +409,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3301255732557501622}
   serializedVersion: 2
-  m_Mass: 600
+  m_Mass: 700
   m_Drag: 0
   m_AngularDrag: 0
   m_UseGravity: 1
@@ -459,7 +459,7 @@ MonoBehaviour:
     rightWheel: {fileID: 6347705838019454231}
     rightWheelVisuals: {fileID: 5836902242442231112}
     suspDist: 0
-    motor: 0
+    motor: 1
     steering: 1
     braking: 1
     Antiroll: 1000
@@ -467,8 +467,8 @@ MonoBehaviour:
   carTransform: {fileID: 7163319851833730783}
   rigidbody: {fileID: 7069131393245706162}
   _centerOfmass: {x: 0, y: -3.4, z: 0}
-  maxMotorTorque: 1500
-  maxSteeringAngle: 30
+  maxMotorTorque: 2000
+  maxSteeringAngle: 25
   ready: 0
   carBodyMaterial: {fileID: 2100000, guid: dce31ade14517294aa9d513da278eba8, type: 2}
   spotLights:

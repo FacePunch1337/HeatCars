@@ -224,8 +224,8 @@ public class CarController : MonoBehaviourPun
                     
                     if (axleInfo.braking)
                     {
-                        axleInfo.rightWheel.GetComponent<WheelCollider>().brakeTorque = 3000;
-                        axleInfo.leftWheel.GetComponent<WheelCollider>().brakeTorque = 3000;
+                        axleInfo.rightWheel.GetComponent<WheelCollider>().brakeTorque = 1500;
+                        axleInfo.leftWheel.GetComponent<WheelCollider>().brakeTorque = 1500;
 
                        
                     }

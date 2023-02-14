@@ -32,11 +32,12 @@ public class ConnectToServer : MonoBehaviourPunCallbacks
         roomListPanel.SetActive(false);
         cars.SetActive(false);
         PhotonNetwork.ConnectUsingSettings();
+        
     }
 
     public override void OnConnectedToMaster()
     {
-        loadingCanvas.enabled = false;
+        //loadingCanvas.enabled = false;
         menuCanvas.enabled = true;
         cars.SetActive(true);
         PhotonNetwork.JoinLobby();
@@ -128,18 +129,10 @@ public class ConnectToServer : MonoBehaviourPunCallbacks
         }
     }
 
-    public override void OnLeftRoom()
-    {
-        PhotonNetwork.LeaveRoom();
-    }
+    
 
 
 
-    public void Exit()
-    {
-        /*menuCanvas.enabled = true;
-        PhotonNetwork.LeaveRoom();*/
-        Application.Quit();
-    }
+  
 
 }

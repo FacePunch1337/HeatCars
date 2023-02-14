@@ -22,7 +22,19 @@ public class NicknameState : MonoBehaviour
 
     void Update()
     {
-      // transform.SetPositionAndRotation(point.localPosition, target.localRotation);
-        transform.LookAt(target.transform);
+
+        CheckTarget();
+        // transform.SetPositionAndRotation(point.localPosition, target.localRotation);
+        
+        
+    }
+
+    public void CheckTarget()
+    {
+        if (target != null)
+        {
+            transform.LookAt(target.transform);
+        }
+        else Destroy(target);
     }
 }
