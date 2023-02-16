@@ -468,7 +468,7 @@ MonoBehaviour:
   rigidbody: {fileID: 7069131393245706162}
   _centerOfmass: {x: 0, y: -3.4, z: 0}
   maxMotorTorque: 2000
-  maxSteeringAngle: 25
+  maxSteeringAngle: 20
   ready: 0
   carBodyMaterial: {fileID: 2100000, guid: dce31ade14517294aa9d513da278eba8, type: 2}
   spotLights:

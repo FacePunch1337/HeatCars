@@ -523,7 +523,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3301255732557501622}
-  m_Mesh: {fileID: -3130313818530134119, guid: ae20cca1f580ee148817ca79f0ada058, type: 3}
+  m_Mesh: {fileID: -3130313818530134119, guid: 58bd32d48ceeed74a8fbe5fb4bae14e7, type: 3}
 --- !u!23 &7413476542405676553
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -1430,8 +1430,8 @@ WheelCollider:
   m_Center: {x: 0, y: 0.15, z: 0}
   m_Radius: 0.5
   m_SuspensionSpring:
-    spring: 1000
-    damper: 2000
+    spring: 500
+    damper: 1000
     targetPosition: 0
   m_SuspensionDistance: 0.2
   m_ForceAppPointDistance: 0
