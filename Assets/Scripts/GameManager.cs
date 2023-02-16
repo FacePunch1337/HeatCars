@@ -99,11 +99,12 @@ public class GameManager : MonoBehaviourPunCallbacks
 
        
 
-        /*if (Input.GetKey(KeyCode.P))
+        if (Input.GetKeyDown(KeyCode.P))
         {
-            SceneManager.LoadScene(1);
-            
-        }*/
+            LeaveGameRoom();
+
+
+        }
     }
 
 
@@ -141,6 +142,7 @@ public class GameManager : MonoBehaviourPunCallbacks
         Cursor.lockState = CursorLockMode.None;
     }
 
+   
     
 
 }

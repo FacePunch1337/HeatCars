@@ -61,6 +61,7 @@ public class CarController : MonoBehaviourPun
 
     public void Start()
     {
+        GameObject.Find("GameManager").TryGetComponent(out GameManager _gameManager);
         myMessage.text = string.Empty;
         lightOn = false;
         view = GetComponent<PhotonView>();
@@ -71,7 +72,7 @@ public class CarController : MonoBehaviourPun
         
         ready = false;
 
-        GameObject.Find("GameManager").TryGetComponent(out GameManager _gameManager);
+        
         GameObject.Find("ChatPanel").TryGetComponent(out Chat _chat);
         gameObject.TryGetComponent(out RearWheelDrive _rearWheelDrive);
         rearWheelDrive = _rearWheelDrive;

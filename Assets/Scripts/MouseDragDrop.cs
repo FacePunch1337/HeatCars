@@ -28,10 +28,9 @@ public class MouseDragDrop : MonoBehaviourPun
 
     void Start()
     {
-        if (photonView.IsMine)
-        {
+        
             targetCamera = GameObject.Find("FollowCamera").GetComponent<Camera>();
-        }
+        
         
         
         

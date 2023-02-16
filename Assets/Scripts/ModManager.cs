@@ -48,6 +48,7 @@ public class ModManager : MonoBehaviourPun
     //public bool modStop = false;
     private void Start()
     {
+        
         gameObject.TryGetComponent(out ModManager _modManager);
         
         GameObject.Find("Trigger").TryGetComponent(out Trigger _trigger);
@@ -68,24 +69,27 @@ public class ModManager : MonoBehaviourPun
        
         if (trigger.readyCount == PhotonNetwork.PlayerList.Length)
         {
-            
+            PhotonNetwork.CurrentRoom.IsVisible = false;
             modManager.startMod = true;
             modManager.teleportToMod = true;
             bool[] _params = { modManager.startMod, modManager.teleportToMod };
             photonView.RPC("StartModeKOB", RpcTarget.All, _params);
             
+
         }
     }
 
     [PunRPC]
     public void StartModeKOB(bool[] _params)
     {
-        
+       
         timerGameObject.GetComponent<Timer>().StartTimer();
         modManager.startMod = _params[0];
         modManager.teleportToMod = _params[1];
         timerGameObject.SetActive(true);
-        PhotonNetwork.CurrentRoom.IsOpen = false;
+       
+        // PhotonNetwork.CurrentRoom.IsOpen = false;
+
 
 
     }
@@ -102,7 +106,11 @@ public class ModManager : MonoBehaviourPun
 
     public void StopModeKOB()
     {
-        leaveModeButton.SetActive(true);
+        if (photonView.Owner.IsMasterClient && photonView.AmOwner)
+        {
+            leaveModeButton.SetActive(true);
+        }
+        
         GameObject.Find("KingTrigger").TryGetComponent(out KingTriggerScript _kingTrigger);
         kingTrigger = _kingTrigger;
         if (kingTrigger.kingName.text != string.Empty && kingTrigger.kingName.text != "?")
@@ -136,15 +144,16 @@ public class ModManager : MonoBehaviourPun
     public void SendEndGameMode()
     {
 
-      
-       
+
+        PhotonNetwork.CurrentRoom.IsVisible = true;
+        modManager.leaveModeButton.SetActive(false);
         //bool[] _params = {modManager.startMod, modManager.teleportToSpawn };
         photonView.RPC("EndGameMode", RpcTarget.All);
         
-        
-       
-        
-       
+
+
+
+
     }
 
     [PunRPC]
@@ -154,10 +163,11 @@ public class ModManager : MonoBehaviourPun
         modManager.teleportToSpawn = true;
         kingTrigger.kingName.text = string.Empty;
         modManager.timerGameObject.SetActive(false);
-        modManager.leaveModeButton.SetActive(false);
-        modManager.timerGameObject.SetActive(false);
         modManager.winnerBoard.SetActive(false);
-        PhotonNetwork.CurrentRoom.IsOpen = true;
+        //PhotonNetwork.CurrentRoom.IsOpen = true;
+        PhotonNetwork.RemoveBufferedRPCs();
+       
+
     }
 
 

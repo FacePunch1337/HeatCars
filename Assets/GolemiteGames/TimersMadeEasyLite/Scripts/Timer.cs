@@ -143,49 +143,40 @@ public class Timer : MonoBehaviourPun
             }
         }
     }
-    void Update()
+    void FixedUpdate()
     {
         if(timerRunning)
         {
 
-            SendStartTimer();
+            if (countMethod == CountMethod.CountDown)
+            {
+                CountDown();
+                if (standardSlider)
+                {
+                    StandardSliderDown();
+                }
+                if (dialSlider)
+                {
+                    DialSliderDown();
+                }
+            }
+            else
+            {
+                CountUp();
+                if (standardSlider)
+                {
+                    StandardSliderUp();
+                }
+                if (dialSlider)
+                {
+                    DialSliderUp();
+                }
+            }
 
         }
     }
 
-    public void SendStartTimer()
-    {
-        gameObject.GetPhotonView().RPC("Go", RpcTarget.AllBuffered);
-    }
-
-    [PunRPC]
-    public void Go()
-    {
-        if (countMethod == CountMethod.CountDown)
-        {
-            CountDown();
-            if (standardSlider)
-            {
-                StandardSliderDown();
-            }
-            if (dialSlider)
-            {
-                DialSliderDown();
-            }
-        }
-        else
-        {
-            CountUp();
-            if (standardSlider)
-            {
-                StandardSliderUp();
-            }
-            if (dialSlider)
-            {
-                DialSliderUp();
-            }
-        }
-    }
+  
 
     private void CountDown()
     {

@@ -7,6 +7,7 @@ using Photon.Realtime;
 using UnityEngine.SceneManagement;
 using Photon.Pun.Demo.PunBasics;
 using Photon.Pun.Demo.Cockpit;
+using System;
 //using UnityEditor.PackageManager.UI;
 
 public class ConnectToServer : MonoBehaviourPunCallbacks
@@ -28,6 +29,7 @@ public class ConnectToServer : MonoBehaviourPunCallbacks
 
     void Start()
     {
+       
         menuCanvas.enabled = false;
         roomListPanel.SetActive(false);
         cars.SetActive(false);
@@ -94,6 +96,10 @@ public class ConnectToServer : MonoBehaviourPunCallbacks
 
     }
 
+    public void Exit()
+    {
+        Application.Quit();
+    }
     public override void OnRoomListUpdate(List<RoomInfo> roomList)
     {
         foreach (RoomInfo info in roomList)
@@ -102,28 +108,37 @@ public class ConnectToServer : MonoBehaviourPunCallbacks
             {
                 int index = _all_rooms_info.FindIndex(x => x.RoomInfo.Name == info.Name);
                 Debug.Log(index);
-                if (index != -1)
+               
+                if (index != -1 || index != 1)
                 {
-
                     Destroy(_all_rooms_info[index].gameObject);
                     _all_rooms_info.RemoveAt(index);
-
-
-
                 }
+                
             }
+            
             else
             {
+                int index = _all_rooms_info.FindIndex(x => x.RoomInfo.Name == info.Name);
+                Debug.Log(index);
+
+
+                if (index == 0)
+                {
+                    Destroy(_all_rooms_info[index].gameObject);
+                    _all_rooms_info.RemoveAt(index);
+                }
                 _item_prefab.TryGetComponent(out Room room);
                 list_item = room;
-
                 list_item = Instantiate(_item_prefab, _content);
 
                 if (list_item != null)
                 {
+                   
                     list_item.SetInfo(info);
                     _all_rooms_info.Add(list_item);
                 }
+               
             }
 
         }
