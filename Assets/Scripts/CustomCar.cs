@@ -158,13 +158,7 @@ public class CustomCar : MonoBehaviourPun
                 carMaterialList.materials[7].color = color;
                 //PlayerPrefs.SetString("CarColor", );
             }
-            else if (gameObject.name.Contains("NoPoliceCar"))
-            {
-                var carMaterialListLocal = gameObject.GetComponentInChildren<MeshRenderer>();
-                carMaterialListLocal.materials[7].color = color;
-                carMaterialListLocal.materials[3].color = color;
-                //PlayerPrefs.SetString("CarColor", );
-            }
+           
             else if (gameObject.name.Contains("Car"))
             {
                 carMaterialList.materials[0].color = color;
@@ -175,6 +169,13 @@ public class CustomCar : MonoBehaviourPun
                 carMaterialList.materials[4].color = color;
                 carMaterialList.materials[9].color = color;
                 // PlayerPrefs.SetInt("CarColor", current_car);
+            }
+            else if (gameObject.name.Contains("Sedan"))
+            {
+                carMaterialList.materials[3].color = color;
+                
+
+                //PlayerPrefs.SetString("CarColor", );
             }
         }
 
