@@ -153,7 +153,7 @@ public class MouseDragDrop : MonoBehaviourPun
         //Debug.Log(targetCamera);
         Vector3 mousePositionOffset = targetCamera.ScreenToWorldPoint(temp);
         var a = mousePositionOffset - originalScreenTargetPosition;
-        selectedRigidbody.velocity = (originalRigidbodyPos + a - selectedRigidbody.transform.position) * forceAmount * Time.deltaTime;
+        selectedRigidbody.velocity = forceAmount * Time.deltaTime * (originalRigidbodyPos + a - selectedRigidbody.transform.position);
     }
 
     public void SendSpawnData(Vector3 spawnPos)

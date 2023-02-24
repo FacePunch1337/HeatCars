@@ -24,13 +24,13 @@ public class GameManager : MonoBehaviourPunCallbacks
     [SerializeField] private GameObject adminPanel;
     private Chat _chat;
     public Chat chat { get { return _chat; } set { _chat = value; } }
-    private ModManager _modManager;
-    public ModManager modManager { get { return _modManager; } set { _modManager = value; } }
+    private ModManagerModule _modManager;
+    public ModManagerModule modManager { get { return _modManager; } set { _modManager = value; } }
 
 
     void Start()
     {
-        _modManager = gameObject.GetComponent<ModManager>();
+        _modManager = gameObject.GetComponent<ModManagerModule>();
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
         menuPanel.SetActive(false);

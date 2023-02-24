@@ -1518,14 +1518,14 @@ WheelCollider:
   m_Mass: 20
   m_WheelDampingRate: 3
   m_ForwardFriction:
-    m_ExtremumSlip: 1
+    m_ExtremumSlip: 2
     m_ExtremumValue: 2
     m_AsymptoteSlip: 2
     m_AsymptoteValue: 2
     m_Stiffness: 5
   m_SidewaysFriction:
     m_ExtremumSlip: 1
-    m_ExtremumValue: 2
+    m_ExtremumValue: 3
     m_AsymptoteSlip: 2
     m_AsymptoteValue: 2
     m_Stiffness: 3
@@ -1580,14 +1580,14 @@ WheelCollider:
   m_Mass: 20
   m_WheelDampingRate: 3
   m_ForwardFriction:
-    m_ExtremumSlip: 1
+    m_ExtremumSlip: 2
     m_ExtremumValue: 2
     m_AsymptoteSlip: 2
     m_AsymptoteValue: 2
     m_Stiffness: 5
   m_SidewaysFriction:
     m_ExtremumSlip: 1
-    m_ExtremumValue: 2
+    m_ExtremumValue: 3
     m_AsymptoteSlip: 2
     m_AsymptoteValue: 2
     m_Stiffness: 3
@@ -1642,14 +1642,14 @@ WheelCollider:
   m_Mass: 20
   m_WheelDampingRate: 3
   m_ForwardFriction:
-    m_ExtremumSlip: 1
+    m_ExtremumSlip: 2
     m_ExtremumValue: 2
     m_AsymptoteSlip: 2
     m_AsymptoteValue: 2
     m_Stiffness: 5
   m_SidewaysFriction:
     m_ExtremumSlip: 1
-    m_ExtremumValue: 2
+    m_ExtremumValue: 3
     m_AsymptoteSlip: 2
     m_AsymptoteValue: 2
     m_Stiffness: 3
@@ -1704,14 +1704,14 @@ WheelCollider:
   m_Mass: 20
   m_WheelDampingRate: 3
   m_ForwardFriction:
-    m_ExtremumSlip: 1
+    m_ExtremumSlip: 2
     m_ExtremumValue: 2
     m_AsymptoteSlip: 2
     m_AsymptoteValue: 2
     m_Stiffness: 5
   m_SidewaysFriction:
     m_ExtremumSlip: 1
-    m_ExtremumValue: 2
+    m_ExtremumValue: 3
     m_AsymptoteSlip: 2
     m_AsymptoteValue: 2
     m_Stiffness: 3

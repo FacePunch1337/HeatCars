@@ -143,7 +143,7 @@ public class CarController : MonoBehaviourPun
 
 
 
-        if (photonView.Owner.IsLocal)
+        if (photonView.IsMine)
         {
             SendRoomChat();
         }
@@ -234,7 +234,7 @@ public class CarController : MonoBehaviourPun
                    WheelFrictionCurve wheelFrictionCurve = new WheelFrictionCurve();
 
                         wheelFrictionCurve.extremumSlip = 1f;
-                        wheelFrictionCurve.extremumValue = 2f;
+                        wheelFrictionCurve.extremumValue = 3f;
                         wheelFrictionCurve.asymptoteSlip = 2f;
                         wheelFrictionCurve.asymptoteValue = 2f;
                         wheelFrictionCurve.stiffness = 2f;
@@ -262,7 +262,7 @@ public class CarController : MonoBehaviourPun
                         WheelFrictionCurve wheelFrictionCurve = new WheelFrictionCurve();
 
                     wheelFrictionCurve.extremumSlip = 1f;
-                    wheelFrictionCurve.extremumValue = 2f;
+                    wheelFrictionCurve.extremumValue = 3f;
                     wheelFrictionCurve.asymptoteSlip = 2f;
                     wheelFrictionCurve.asymptoteValue = 2f;
                     wheelFrictionCurve.stiffness = 3f;

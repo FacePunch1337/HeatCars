@@ -79,6 +79,9 @@ MonoBehaviour:
   - Go
   - StopModeKOB
   - SyncTimeValue
+  - SetGameMode
+  - StartGame
+  - EndGame
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1

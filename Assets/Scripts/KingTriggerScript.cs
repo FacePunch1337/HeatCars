@@ -48,6 +48,8 @@ public class KingTriggerScript : MonoBehaviourPun
         }
     }
 
+
+
     private void OnTriggerExit(Collider other)
     {
         if (other.gameObject.CompareTag("Car"))

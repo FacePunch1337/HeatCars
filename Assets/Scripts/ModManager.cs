@@ -98,8 +98,14 @@ public class ModManager : MonoBehaviourPun
 
     public void SendStopModeKOB()
     {
-        gameObject.GetPhotonView().RPC("StopModeKOB", RpcTarget.All);
-       
+        
+        photonView.RPC("StopModeKOB", RpcTarget.All);
+
+
+
+
+
+
     }
 
     [PunRPC]
@@ -128,6 +134,39 @@ public class ModManager : MonoBehaviourPun
             winnerBoard.SetActive(true);
             
 
+        }
+        else if(kingTrigger.kingName.text == "?")
+        {
+            bool flag = false;
+            IEnumerator WaitForVariableChange()
+            {
+                StartCoroutine(WaitForVariableChange());
+                // ∆дем изменени€ состо€ни€ переменной
+                while (!flag)
+                {
+                    if(kingTrigger.kingName.text != "?")
+                    {
+                        winnerBoard.GetComponent<TMP_Text>().text = $"{kingTrigger.kingName.text}" + " " + "won";
+
+                        // if (car.GetComponent<PhotonView>().Owner.IsMasterClient && car.GetComponent<PhotonView>().AmOwner)
+                        // {
+                        Cursor.visible = true;
+                        Cursor.lockState = CursorLockMode.None;
+
+                        //  }
+
+                        winnerBoard.SetActive(true);
+                        break;
+                    }
+
+                    yield return null;
+                }
+               
+                // ѕосле изменени€ состо€ни€ переменной продолжаем выполнение метода
+                Debug.Log("Variable has been changed");
+            }
+
+          
         }
         else if (kingTrigger.kingName.text == string.Empty)
         {

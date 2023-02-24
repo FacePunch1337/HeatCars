@@ -10156,6 +10156,7 @@ GameObject:
   - component: {fileID: 8200699953548629158}
   - component: {fileID: 8200699953548629156}
   - component: {fileID: 8200699953548629157}
+  - component: {fileID: 8200699953548629159}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -20450,8 +20451,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 8200699953548629158}
-        m_TargetAssemblyTypeName: ModManager, Assembly-CSharp
+      - m_Target: {fileID: 8200699953548629159}
+        m_TargetAssemblyTypeName: ModManagerModule, Assembly-CSharp
         m_MethodName: SendEndGameMode
         m_Mode: 1
         m_Arguments:
@@ -43116,9 +43117,9 @@ MonoBehaviour:
   onTimerEnd:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 8200699953548629158}
-        m_TargetAssemblyTypeName: ModManager, Assembly-CSharp
-        m_MethodName: SendStopModeKOB
+      - m_Target: {fileID: 8200699953548629159}
+        m_TargetAssemblyTypeName: ModManagerModule, Assembly-CSharp
+        m_MethodName: SendEndGameMode
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -54279,9 +54280,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 8200699953548629158}
-        m_TargetAssemblyTypeName: ModManager, Assembly-CSharp
-        m_MethodName: SendStartMod
+      - m_Target: {fileID: 8200699953548629159}
+        m_TargetAssemblyTypeName: ModManagerModule, Assembly-CSharp
+        m_MethodName: SendSetGameMode
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -75601,7 +75602,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 620804194}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 47246585e7d01494ba44efb704587048, type: 3}
   m_Name: 
@@ -75624,6 +75625,34 @@ MonoBehaviour:
   timerGameObject: {fileID: 8187524711046252058}
   winnerBoard: {fileID: 525868699}
   leaveModeButton: {fileID: 1190660037}
+--- !u!114 &8200699953548629159
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 620804194}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 89be17943358bd2499b719223bbd8f8b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spawnPointsKOB:
+  - {fileID: 4271601916956639780}
+  - {fileID: 1990759965}
+  - {fileID: 956105669}
+  - {fileID: 1446910829}
+  - {fileID: 1834159553}
+  - {fileID: 1885473022}
+  - {fileID: 980698712}
+  - {fileID: 471514020}
+  - {fileID: 1426646886}
+  - {fileID: 2028501934}
+  timerGameObject: {fileID: 842878918}
+  winnerBoard: {fileID: 9152385212539638189}
+  leaveModeButton: {fileID: 8187524711046252058}
+  modPanel: {fileID: 525868699}
+  buttonStart: {fileID: 1190660037}
 --- !u!1 &8201384706701958911
 GameObject:
   m_ObjectHideFlags: 0
